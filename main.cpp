@@ -1,13 +1,11 @@
-#include<isostream>
-#include<string>
+#include "mainwindow.h"
+#include <QSqlQueryModel>
+#include <QApplication>
 
-using namespace std;
-
-
-
-int main()
+int main(int argc, char *argv[])
 {
-	cout<<"Hello ines!!"<<endl;
-	
-	return ;
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
 }
