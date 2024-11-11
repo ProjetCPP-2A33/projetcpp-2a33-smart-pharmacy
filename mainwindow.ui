@@ -43,7 +43,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -278,7 +278,7 @@
          <string>Exporter format pdf</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="pb_pdf">
         <property name="geometry">
          <rect>
           <x>670</x>
@@ -640,7 +640,7 @@
        <zorder>pushButton_9</zorder>
        <zorder>lineEdit_10</zorder>
        <zorder>label_9</zorder>
-       <zorder>pushButton_3</zorder>
+       <zorder>pb_pdf</zorder>
        <zorder>groupBox</zorder>
        <zorder>lineEdit_12</zorder>
        <zorder>tableWidget</zorder>

@@ -6,6 +6,9 @@
 #include <QMap>
 #include <QSqlError>
 #include <QDebug>
+#include <QPdfWriter>
+#include <QPainter>
+#include <QMessageBox>
 
 Commande::Commande(int idc,QDate datec,double montantTotal,QString modePaiement,QString etat)
 {
@@ -180,3 +183,48 @@ QMap<QString, int> Commande::statistiquesParModePaiement() {
     return statistiques;
 }
 
+
+
+void Commande::exporterPDF(const QString &nomFichier, QAbstractItemModel *model)
+{
+    QPdfWriter pdfWriter(nomFichier);
+    QPainter painter(&pdfWriter);
+
+    // Paramètres PDF
+    painter.setPen(Qt::black);
+    painter.setFont(QFont("Arial", 20));
+
+    // Titre
+    painter.drawText(2500, 1100, "Liste des Commandes");
+
+    // Coordonnées et dimensions des cellules
+    int startX = 200;
+    int startY = 1800;
+    int cellWidth = 1100;
+    int cellHeight = 450;
+
+    // En-têtes du tableau
+    QStringList headers = {"ID Commande", "Date", "Montant Total", "Mode de Paiement", "État"};
+    painter.setFont(QFont("Arial", 10, QFont::Bold));
+    for (int col = 0; col < headers.size(); ++col) {
+        painter.drawText(startX + col * cellWidth, startY, cellWidth, cellHeight, Qt::AlignCenter, headers[col]);
+    }
+
+    // Données des commandes
+    int rowCount = model->rowCount();
+    painter.setFont(QFont("Arial", 10));
+    for (int row = 0; row < rowCount; ++row) {
+        QColor bgColor = (row % 2 == 0) ? Qt::lightGray : Qt::white;
+
+        for (int col = 0; col < headers.size(); ++col) {
+            QString data = model->data(model->index(row, col)).toString();
+            QRect cellRect(startX + col * cellWidth, startY + (row + 1) * cellHeight, cellWidth, cellHeight);
+
+            painter.fillRect(cellRect, bgColor);
+            painter.drawText(cellRect, Qt::AlignCenter, data);
+            painter.drawRect(cellRect);
+        }
+    }
+
+    QMessageBox::information(nullptr, "PDF Créé", "Un fichier PDF a été créé.");
+}

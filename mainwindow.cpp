@@ -10,6 +10,7 @@
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
 #include <QTabWidget>
+#include <QFileDialog>
 
 
 
@@ -261,5 +262,25 @@ void MainWindow::on_pushButton_statistiques_clicked() {
     ui->verticalLayout_graphique->addWidget(chartView); // Ajoutez un QVBoxLayout dans votre UI
 }
 
+
+
+void MainWindow::on_pb_pdf_clicked()
+{
+    QString nomFichier = QFileDialog::getSaveFileName(this, "Enregistrer le PDF", "", "Fichiers PDF (*.pdf)");
+    if (!nomFichier.isEmpty()) {
+        Commande commande;
+
+        // Mettre à jour et récupérer les données de commande
+        QSqlQueryModel *model = commande.afficher();
+
+        // Exporter vers PDF
+        commande.exporterPDF(nomFichier, model);
+
+        // Libération de mémoire
+        delete model;
+
+        QMessageBox::information(this, "Exportation PDF", "Exportation vers PDF réussie !");
+    }
+}
 
 

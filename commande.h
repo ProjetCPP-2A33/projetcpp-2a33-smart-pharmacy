@@ -44,6 +44,8 @@ public:
     QSqlQueryModel* trierParDateDesc();
     bool idExiste(int idc);
     QMap<QString, int> statistiquesParModePaiement();
+    void exporterPDF(const QString &nomFichier, QAbstractItemModel *model);
+
 
 
 

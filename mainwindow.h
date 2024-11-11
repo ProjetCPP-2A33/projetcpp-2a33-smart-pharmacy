@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "commande.h"
 #include <QVector>
+#include"image.qrc"
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +25,7 @@ private slots:
     void on_pushButton_9_clicked();
     void on_pushButton_2_clicked();
     void on_pushButton_statistiques_clicked();
+    void on_pb_pdf_clicked();
 
 
 private:
