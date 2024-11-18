@@ -1,4 +1,6 @@
 #include "commande.h"
+#include "twilio.h"
+#include <iostream>
 #include <qlocale.h>
 #include <QSqlQuery>
 #include <QString>
@@ -10,6 +12,7 @@
 #include <QPainter>
 #include <QMessageBox>
 
+
 Commande::Commande(int idc,QDate datec,double montantTotal,QString modePaiement,QString etat)
 {
     this->idc=idc;
@@ -17,6 +20,7 @@ Commande::Commande(int idc,QDate datec,double montantTotal,QString modePaiement,
     this->montantTotal=montantTotal;
     this->modePaiement=modePaiement;
     this->etat= etat;
+    //twilio_ = new twilio::Twilio("YOUR_ACCOUNT_SID", "YOUR_AUTH_TOKEN");
 
 }
 bool Commande::ajouter() {
@@ -227,4 +231,26 @@ void Commande::exporterPDF(const QString &nomFichier, QAbstractItemModel *model)
     }
 
     QMessageBox::information(nullptr, "PDF Créé", "Un fichier PDF a été créé.");
+}
+
+
+void Commande::addToHistory(const QString &action, int idc) {
+    QString cheminFichier = "C:/Users/yomna/OneDrive/Documents/gestioncommande/gestioncommande.txt";
+    QFile file(cheminFichier);
+
+    if (!file.open(QIODevice::Append | QIODevice::Text)) {
+        qDebug() << "Erreur lors de l'ouverture du fichier historique.";
+        return;
+    }
+
+    QTextStream out(&file);
+    QDateTime currentDateTime = QDateTime::currentDateTime();
+    out << currentDateTime.toString("yyyy-MM-dd hh:mm:ss") << " - " << action;
+    if (idc != 0) {
+        out << " de l'ID " << idc;
+    }
+    out << "\n";
+    file.close();
+
+    qDebug() << "Historique mis à jour : " << action << " pour ID " << idc;
 }

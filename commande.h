@@ -8,7 +8,13 @@
 #include <QtCharts/QChartView>
 #include <QtCharts/QPieSeries>
 #include <QMap>
-
+#include <QFile>
+#include <QTextStream>
+#include <QDateTime>
+#include <QCalendarWidget>
+#include <QDialog>
+#include <QVBoxLayout>
+#include <QPushButton>
 
 
 class Commande {
@@ -45,6 +51,8 @@ public:
     bool idExiste(int idc);
     QMap<QString, int> statistiquesParModePaiement();
     void exporterPDF(const QString &nomFichier, QAbstractItemModel *model);
+    void addToHistory(const QString &action, int idc);
+    QDate ouvrirCalendrier();
 
 
 

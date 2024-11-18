@@ -3,8 +3,8 @@
 
 #include <QMainWindow>
 #include "commande.h"
-#include <QVector>
-#include"image.qrc"
+#include <Qstring>
+
 
 namespace Ui {
 class MainWindow;
@@ -26,12 +26,16 @@ private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_statistiques_clicked();
     void on_pb_pdf_clicked();
-
+    void on_pb_historique_clicked();
+    void envoyerSMS(const QString &destinataire, const QString &message);
+    void on_sendSMS_clicked();
 
 private:
     Ui::MainWindow *ui;
     Commande Ctemp;
    void afficherCommandes();
+    void afficherHistorique();
+    void addToHistory(const QString &action, int idc);
     // Ajoutez cette ligne dans la section des déclarations de votre classe MainWindow
 
 };

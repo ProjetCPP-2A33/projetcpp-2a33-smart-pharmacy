@@ -9,10 +9,19 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Recherche des modules nécessaires, incluant QtCharts
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql Charts)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql Charts)
+# Find necessary Qt modules
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql Charts Network)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql Charts Network)
 
+# Add cURL include and library paths
+include_directories("C:/Users/yomna/Downloads/curl-win64-latest/curl-8.11.0_1-win64-mingw/include")
+link_directories("C:/Users/yomna/Downloads/curl-win64-latest/curl-8.11.0_1-win64-mingw/lib")
+
+# Define CURL_STATICLIB if using the static library
+# This should be done before creating the target
+add_definitions(-DCURL_STATICLIB)
+
+# Add Twilio headers and source
 set(PROJECT_SOURCES
     main.cpp
     mainwindow.cpp
@@ -22,8 +31,11 @@ set(PROJECT_SOURCES
     commande.cpp
     connection.h
     connection.cpp
+    twilio.h
+    twilio.cpp
 )
 
+# Specify the executable
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(gestioncommande
         MANUAL_FINALIZATION
@@ -38,13 +50,25 @@ else()
     endif()
 endif()
 
-# Lier les bibliothèques nécessaires, incluant QtCharts
-target_link_libraries(gestioncommande PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Sql Qt${QT_VERSION_MAJOR}::Charts)
+# Link the necessary libraries including Qt, Twilio, and cURL
+target_link_libraries(gestioncommande PRIVATE
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Sql
+    Qt${QT_VERSION_MAJOR}::Charts
+    Qt${QT_VERSION_MAJOR}::Network
+    "C:/Users/yomna/Downloads/curl-win64-latest/curl-8.11.0_1-win64-mingw/lib/libcurl.a"
+    ws2_32
+    wldap32
+    crypt32
+    advapi32
+    secur32
+)
 
-# Définir les propriétés pour macOS et Windows
+# Set properties for macOS and Windows
 if(${QT_VERSION} VERSION_LESS 6.1.0)
     set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.gestioncommande)
 endif()
+
 set_target_properties(gestioncommande PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
@@ -53,7 +77,7 @@ set_target_properties(gestioncommande PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-# Directives d'installation
+# Installation directives
 include(GNUInstallDirs)
 install(TARGETS gestioncommande
     BUNDLE DESTINATION .
@@ -61,8 +85,7 @@ install(TARGETS gestioncommande
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-# Finaliser l'exécutable pour Qt 6
+# Finalize the executable for Qt 6
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(gestioncommande)
 endif()
-

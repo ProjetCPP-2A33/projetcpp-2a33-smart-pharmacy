@@ -11,9 +11,12 @@
 #include <QtCharts/QPieSlice>
 #include <QTabWidget>
 #include <QFileDialog>
-
-
-
+#include <QDesktopServices>
+#include <QUrl>
+#include <QFile>
+#include <QTextStream>
+#include <QNetworkReply>
+#include <QNetworkAccessManager>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -37,8 +40,10 @@ void MainWindow::afficherCommandes()
     ui->tableWidget->setRowCount(0);
 
     // Créer une instance de Commande pour appeler afficher()
-    Commande commande;
-    QSqlQueryModel* model = commande.afficher();
+    Commande Ctemp;
+    QSqlQueryModel* model = Ctemp.afficher();
+    addToHistory("Affichage des commandes", 0);
+    //addToHistory("Affichage de la commande",idc);
 
     // Remplir le QTableWidget avec les données du modèle
     for (int row = 0; row < model->rowCount(); ++row) {
@@ -90,6 +95,7 @@ void MainWindow::on_pushButton_5_clicked() {
                                  QObject::tr("Ajout effectué\n"
                                              "Click Cancel to exit."), QMessageBox::Cancel);
         afficherCommandes();  // Rafraîchir l'affichage après l'ajout réussi
+        addToHistory("Ajout de la commande", idc);
     } else {
         QMessageBox::critical(nullptr, QObject::tr("Not OK"),
                               QObject::tr("Ajout non effectué.\n"
@@ -109,6 +115,7 @@ void MainWindow::on_pushButton_5_clicked() {
                                      QObject::tr("Suppression effectuée\n"
                                                  "Click Cancel to exit."), QMessageBox::Cancel);
             afficherCommandes(); // Rafraîchir le tableau
+            addToHistory("Suppression de la commande", idc);
         } else {
             QMessageBox::critical(nullptr, QObject::tr("Not OK"),
                                   QObject::tr("Suppression non effectuée.\n"
@@ -161,6 +168,7 @@ void MainWindow::on_pushButton_5_clicked() {
                                      QObject::tr("Modification effectuée avec succès.\nCliquez sur Annuler pour quitter."),
                                      QMessageBox::Cancel);
             afficherCommandes();
+            addToHistory("modification de la commande", idc);
         } else {
             QMessageBox::critical(nullptr, QObject::tr("Erreur"),
                                   QObject::tr("La modification a échoué.\nCliquez sur Annuler pour quitter."),
@@ -173,6 +181,7 @@ void MainWindow::on_pushButton_9_clicked() {
 
     Commande Ctemp;
     QSqlQueryModel* model = Ctemp.rechercher(idc);
+    addToHistory("recherche de la commande", idc);
 
     if (model && model->rowCount() > 0) {
         ui->tableWidget->setRowCount(0);  // Vider le tableau avant d'afficher les résultats
@@ -192,6 +201,7 @@ void MainWindow::on_pushButton_9_clicked() {
 void MainWindow::on_pushButton_2_clicked() {
     Commande Ctemp;
     QSqlQueryModel *model = Ctemp.trierParDateDesc();
+    addToHistory("trier de la commande", 0);
 
     if (model && model->rowCount() > 0) {
         // Vider le QTableWidget avant d'ajouter les nouvelles données
@@ -283,4 +293,80 @@ void MainWindow::on_pb_pdf_clicked()
     }
 }
 
+void MainWindow::afficherHistorique() {
+    QString cheminFichier = "C:/Users/yomna/OneDrive/Documents/gestioncommande/gestioncommande.txt";
+    QFile file(cheminFichier);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QMessageBox::warning(this, "Erreur", "Impossible d'ouvrir le fichier d'historique.");
+        return;
+    }
+
+    QTextStream in(&file);
+    QString historique = in.readAll();
+    file.close();
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Historique des commandes");
+    msgBox.setText(historique);
+    msgBox.exec();
+}
+
+void MainWindow::addToHistory(const QString &action, int idc) {
+    Commande Ctemp;
+    Ctemp.addToHistory(action, idc);
+}
+
+void MainWindow::on_pb_historique_clicked() {
+    QString cheminFichier = "C:/Users/yomna/OneDrive/Documents/gestioncommande/gestioncommande.txt";
+    QDesktopServices::openUrl(QUrl::fromLocalFile(cheminFichier));
+    QMessageBox::information(this, "Historique", "Les actions ont été enregistrées dans l'historique.");
+}
+
+
+void MainWindow::envoyerSMS(const QString &destinataire, const QString &message)
+{
+    // SID et auth token de Twilio
+    QString sid = "AC3d774920150677652a616de9643321c5";
+    QString authToken = "96634546fbb71bb477b20b5831c7b006";
+
+    // URL de l'API Twilio
+    QString url = "https://api.twilio.com/2010-04-01/Accounts/" + sid + "/Messages.json";
+
+    // Créer un gestionnaire de requêtes
+    QNetworkAccessManager *networkAccessManager = new QNetworkAccessManager(this);
+
+    // Connecter le signal pour traiter la réponse
+   // connect(networkAccessManager, &QNetworkAccessManager::finished, this, &MainWindow::replyFinished);
+
+    // Construire les données POST
+    QByteArray postData;
+    postData.append("To=" + QUrl::toPercentEncoding(destinataire)); // Encodage pour les caractères spéciaux
+    postData.append("&From=%2B15075937465"); // Numéro de l'expéditeur avec "%2B" pour "+"
+    postData.append("&Body=" + QUrl::toPercentEncoding(message));
+
+    // Configurer la requête HTTP
+    QNetworkRequest request;
+    request.setUrl(QUrl(url));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+
+    // Ajouter l'autorisation avec Basic Auth
+    QString credentials = QString("%1:%2").arg(sid).arg(authToken);
+    request.setRawHeader("Authorization", "Basic " + credentials.toUtf8().toBase64());
+
+    // Envoyer la requête
+    networkAccessManager->post(request, postData);
+
+    QMessageBox::information(this, "Envoi SMS", "Le SMS est en cours d'envoi...");
+}
+
+
+
+void MainWindow::on_sendSMS_clicked()
+{
+    QString destinataire = "+21620629612"; // Numéro de téléphone du destinataire
+    QString message = ui->contenu->toPlainText(); // Récupérer le contenu du champ de texte
+
+    envoyerSMS(destinataire, message);
+
+}
 
