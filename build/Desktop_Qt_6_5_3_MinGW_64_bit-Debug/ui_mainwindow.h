@@ -16,6 +16,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateEdit>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -26,7 +27,6 @@
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QTableWidget>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -40,8 +40,8 @@ public:
     QTabWidget *tabWidget;
     QWidget *tab;
     QPushButton *pushButton_11;
-    QPushButton *pushButton_12;
-    QPushButton *pushButton_13;
+    QPushButton *pushButton_stat;
+    QPushButton *pushButton_recherche;
     QGroupBox *groupBox;
     QLabel *label;
     QLineEdit *idProduitAjout;
@@ -57,16 +57,21 @@ public:
     QCheckBox *checkBox_3;
     QLabel *label_8;
     QLineEdit *prixAjout;
+    QPushButton *pushButton_pdf;
+    QTableWidget *tableWidget_2;
+    QLineEdit *lineEdit_rech;
+    QLabel *label_9;
+    QTableView *tableView;
+    QLineEdit *lineEdit_3;
+    QComboBox *comboBox_tri;
+    QComboBox *comboBox_rech;
+    QLabel *label_7;
+    QLineEdit *lineEdit_idpdf;
+    QPushButton *pushButton;
+    QLabel *label_10;
+    QPushButton *addbutton;
     QPushButton *pushButton_10;
     QPushButton *pushButton_2;
-    QPushButton *pushButton_5;
-    QTableWidget *tableWidget_2;
-    QLineEdit *lineEdit_2;
-    QLabel *label_9;
-    QPushButton *addbutton;
-    QTableView *tableView;
-    QPushButton *pushButton_14;
-    QLineEdit *lineEdit_3;
     QWidget *tab_4;
     QLabel *label_21;
     QLabel *label_22;
@@ -77,20 +82,29 @@ public:
     QLabel *label_25;
     QWidget *tab_3;
     QLabel *label_17;
-    QPushButton *pushButton_3;
-    QLabel *label_18;
-    QLabel *label_79;
-    QTextEdit *textEdit;
+    QPushButton *send;
     QLabel *label_19;
     QLabel *label_20;
+    QLineEdit *email;
+    QLineEdit *nomProduit;
+    QDateEdit *dateExpiration;
+    QLineEdit *nom;
+    QLabel *label_13;
+    QLabel *label_14;
+    QLabel *label_18;
+    QLabel *label_26;
     QWidget *tab_2;
     QLabel *label_11;
     QLabel *label_12;
     QLabel *label_15;
     QLabel *label_16;
     QLabel *label_78;
-    QLabel *label_26;
-    QPushButton *pushButton_6;
+    QPushButton *showStatsForMen;
+    QPushButton *showStatsForWomen;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *horizontalLayout_1;
+    QWidget *horizontalLayoutWidget_2;
+    QHBoxLayout *horizontalLayout_2;
     QWidget *tab_9;
     QWidget *tab_10;
     QWidget *tab_11;
@@ -151,11 +165,11 @@ public:
         icon.addFile(QString::fromUtf8("../../Downloads/460177168_1665954550921902_7047727999174566408_n-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::On);
         pushButton_11->setIcon(icon);
         pushButton_11->setIconSize(QSize(23, 23));
-        pushButton_12 = new QPushButton(tab);
-        pushButton_12->setObjectName("pushButton_12");
-        pushButton_12->setGeometry(QRect(670, 390, 141, 31));
-        pushButton_12->setFont(font2);
-        pushButton_12->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+        pushButton_stat = new QPushButton(tab);
+        pushButton_stat->setObjectName("pushButton_stat");
+        pushButton_stat->setGeometry(QRect(620, 390, 141, 31));
+        pushButton_stat->setFont(font2);
+        pushButton_stat->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "    color: black;\n"
 "    background-color: rgb(68, 176, 112);\n"
 "    font-size: 18px;\n"
@@ -173,13 +187,13 @@ public:
 "}"));
         QIcon icon1;
         icon1.addFile(QString::fromUtf8("../../Downloads/461484528_521659267261567_8640738131585914016_n-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::On);
-        pushButton_12->setIcon(icon1);
-        pushButton_12->setIconSize(QSize(23, 23));
-        pushButton_13 = new QPushButton(tab);
-        pushButton_13->setObjectName("pushButton_13");
-        pushButton_13->setGeometry(QRect(1030, 120, 101, 31));
-        pushButton_13->setFont(font2);
-        pushButton_13->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+        pushButton_stat->setIcon(icon1);
+        pushButton_stat->setIconSize(QSize(23, 23));
+        pushButton_recherche = new QPushButton(tab);
+        pushButton_recherche->setObjectName("pushButton_recherche");
+        pushButton_recherche->setGeometry(QRect(990, 50, 101, 31));
+        pushButton_recherche->setFont(font2);
+        pushButton_recherche->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "    color: black;\n"
 "    background-color: rgb(68, 176, 112);\n"
 "    font-size: 18px;\n"
@@ -197,8 +211,8 @@ public:
 "}"));
         QIcon icon2;
         icon2.addFile(QString::fromUtf8("../../Downloads/460563423_1575797083314263_1051363182548254163_n__1_-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::On);
-        pushButton_13->setIcon(icon2);
-        pushButton_13->setIconSize(QSize(23, 23));
+        pushButton_recherche->setIcon(icon2);
+        pushButton_recherche->setIconSize(QSize(23, 23));
         groupBox = new QGroupBox(tab);
         groupBox->setObjectName("groupBox");
         groupBox->setGeometry(QRect(30, 30, 241, 401));
@@ -279,11 +293,11 @@ public:
         categorieAjout->raise();
         checkBox->raise();
         checkBox_3->raise();
-        pushButton_10 = new QPushButton(tab);
-        pushButton_10->setObjectName("pushButton_10");
-        pushButton_10->setGeometry(QRect(420, 120, 141, 31));
-        pushButton_10->setFont(font2);
-        pushButton_10->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+        pushButton_pdf = new QPushButton(tab);
+        pushButton_pdf->setObjectName("pushButton_pdf");
+        pushButton_pdf->setGeometry(QRect(410, 390, 181, 31));
+        pushButton_pdf->setFont(font2);
+        pushButton_pdf->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "    color: black;\n"
 "    background-color: rgb(68, 176, 112);\n"
 "    font-size: 18px;\n"
@@ -300,57 +314,9 @@ public:
 "    border-radius: 10px;\n"
 "}"));
         QIcon icon3;
-        icon3.addFile(QString::fromUtf8("../../Downloads/461508595_825905609429817_3860263783025879477_n-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::On);
-        pushButton_10->setIcon(icon3);
-        pushButton_10->setIconSize(QSize(27, 27));
-        pushButton_2 = new QPushButton(tab);
-        pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(280, 110, 111, 31));
-        pushButton_2->setFont(font2);
-        pushButton_2->setStyleSheet(QString::fromUtf8("QPushButton{\n"
-"    color: black;\n"
-"    background-color: rgb(68, 176, 112);\n"
-"    font-size: 18px;\n"
-"    line-height: 1.5;\n"
-"    width: 200px;\n"
-"    height: 40px;\n"
-"    opacity: 0.65;\n"
-"    text-align: center;\n"
-"    \n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-color: #097C36; /* Couleur de la bordure modifi\303\251e */\n"
-"    \n"
-"    border-radius: 10px;\n"
-"}"));
-        QIcon icon4;
-        icon4.addFile(QString::fromUtf8("../../Downloads/moins-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_2->setIcon(icon4);
-        pushButton_2->setIconSize(QSize(30, 50));
-        pushButton_5 = new QPushButton(tab);
-        pushButton_5->setObjectName("pushButton_5");
-        pushButton_5->setGeometry(QRect(370, 390, 271, 31));
-        pushButton_5->setFont(font2);
-        pushButton_5->setStyleSheet(QString::fromUtf8("QPushButton{\n"
-"    color: black;\n"
-"    background-color: rgb(68, 176, 112);\n"
-"    font-size: 18px;\n"
-"    line-height: 1.5;\n"
-"    width: 200px;\n"
-"    height: 40px;\n"
-"    opacity: 0.65;\n"
-"    text-align: center;\n"
-"    \n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-color: #097C36; /* Couleur de la bordure modifi\303\251e */\n"
-"    \n"
-"    border-radius: 10px;\n"
-"}"));
-        QIcon icon5;
-        icon5.addFile(QString::fromUtf8("../../Downloads/461512018_8583292871729025_1881610230410531967_n-removebg-preview (1).png"), QSize(), QIcon::Normal, QIcon::On);
-        pushButton_5->setIcon(icon5);
-        pushButton_5->setIconSize(QSize(32, 32));
+        icon3.addFile(QString::fromUtf8("../../Downloads/461512018_8583292871729025_1881610230410531967_n-removebg-preview (1).png"), QSize(), QIcon::Normal, QIcon::On);
+        pushButton_pdf->setIcon(icon3);
+        pushButton_pdf->setIconSize(QSize(32, 32));
         tableWidget_2 = new QTableWidget(tab);
         if (tableWidget_2->columnCount() < 6)
             tableWidget_2->setColumnCount(6);
@@ -418,10 +384,10 @@ public:
         tableWidget_2->setItem(3, 5, __qtablewidgetitem29);
         tableWidget_2->setObjectName("tableWidget_2");
         tableWidget_2->setGeometry(QRect(370, 180, 761, 181));
-        lineEdit_2 = new QLineEdit(tab);
-        lineEdit_2->setObjectName("lineEdit_2");
-        lineEdit_2->setGeometry(QRect(590, 120, 431, 31));
-        lineEdit_2->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+        lineEdit_rech = new QLineEdit(tab);
+        lineEdit_rech->setObjectName("lineEdit_rech");
+        lineEdit_rech->setGeometry(QRect(630, 50, 351, 31));
+        lineEdit_rech->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "                            border: 2px solid #4CAF50;\n"
 "                            border-radius: 10px;\n"
 "                            padding: 5px;\n"
@@ -434,9 +400,71 @@ public:
         label_9->setGeometry(QRect(-20, -40, 1181, 901));
         label_9->setPixmap(QPixmap(QString::fromUtf8("../../Pictures/Screenshots/Capture d'\303\251cran 2024-10-07 191245.png")));
         label_9->setScaledContents(true);
+        tableView = new QTableView(tab);
+        tableView->setObjectName("tableView");
+        tableView->setGeometry(QRect(340, 180, 801, 181));
+        lineEdit_3 = new QLineEdit(tab);
+        lineEdit_3->setObjectName("lineEdit_3");
+        lineEdit_3->setGeometry(QRect(820, 390, 161, 31));
+        lineEdit_3->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"                            border: 2px solid #4CAF50;\n"
+"                            border-radius: 10px;\n"
+"                            padding: 5px;\n"
+"                            background-color: #f0f0f0;\n"
+"	                        border-color: rgb(68, 176, 112);\n"
+"                            color: #333;\n"
+"                            }"));
+        comboBox_tri = new QComboBox(tab);
+        comboBox_tri->addItem(QString());
+        comboBox_tri->addItem(QString());
+        comboBox_tri->addItem(QString());
+        comboBox_tri->addItem(QString());
+        comboBox_tri->setObjectName("comboBox_tri");
+        comboBox_tri->setGeometry(QRect(470, 430, 271, 31));
+        comboBox_rech = new QComboBox(tab);
+        comboBox_rech->addItem(QString());
+        comboBox_rech->addItem(QString());
+        comboBox_rech->setObjectName("comboBox_rech");
+        comboBox_rech->setGeometry(QRect(460, 50, 161, 31));
+        label_7 = new QLabel(tab);
+        label_7->setObjectName("label_7");
+        label_7->setGeometry(QRect(380, 430, 91, 31));
+        lineEdit_idpdf = new QLineEdit(tab);
+        lineEdit_idpdf->setObjectName("lineEdit_idpdf");
+        lineEdit_idpdf->setGeometry(QRect(290, 390, 113, 31));
+        lineEdit_idpdf->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"                            border: 2px solid #4CAF50;\n"
+"                            border-radius: 10px;\n"
+"                            padding: 5px;\n"
+"                            background-color: #f0f0f0;\n"
+"	                        border-color: rgb(68, 176, 112);\n"
+"                            color: #333;\n"
+"                            }"));
+        pushButton = new QPushButton(tab);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(990, 111, 151, 41));
+        pushButton->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"    color: black;\n"
+"    background-color: rgb(68, 176, 112);\n"
+"    font-size: 18px;\n"
+"    line-height: 1.5;\n"
+"    width: 200px;\n"
+"    height: 40px;\n"
+"    opacity: 0.65;\n"
+"    text-align: center;\n"
+"    \n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-color: #097C36; /* Couleur de la bordure modifi\303\251e */\n"
+"    \n"
+"    border-radius: 10px;\n"
+"}"));
+        label_10 = new QLabel(tab);
+        label_10->setObjectName("label_10");
+        label_10->setGeometry(QRect(340, 20, 131, 31));
         addbutton = new QPushButton(tab);
         addbutton->setObjectName("addbutton");
-        addbutton->setGeometry(QRect(280, 70, 111, 31));
+        addbutton->setGeometry(QRect(341, 111, 204, 44));
         addbutton->setFont(font2);
         addbutton->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "    color: black;\n"
@@ -454,18 +482,15 @@ public:
 "    \n"
 "    border-radius: 10px;\n"
 "}"));
-        QIcon icon6;
-        icon6.addFile(QString::fromUtf8("../../Downloads/plus-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::On);
-        addbutton->setIcon(icon6);
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8("../../Downloads/plus-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::On);
+        addbutton->setIcon(icon4);
         addbutton->setIconSize(QSize(30, 50));
-        tableView = new QTableView(tab);
-        tableView->setObjectName("tableView");
-        tableView->setGeometry(QRect(340, 180, 801, 181));
-        pushButton_14 = new QPushButton(tab);
-        pushButton_14->setObjectName("pushButton_14");
-        pushButton_14->setGeometry(QRect(820, 440, 141, 31));
-        pushButton_14->setFont(font2);
-        pushButton_14->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+        pushButton_10 = new QPushButton(tab);
+        pushButton_10->setObjectName("pushButton_10");
+        pushButton_10->setGeometry(QRect(550, 110, 204, 44));
+        pushButton_10->setFont(font2);
+        pushButton_10->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "    color: black;\n"
 "    background-color: rgb(68, 176, 112);\n"
 "    font-size: 18px;\n"
@@ -481,34 +506,54 @@ public:
 "    \n"
 "    border-radius: 10px;\n"
 "}"));
-        pushButton_14->setIcon(icon3);
-        pushButton_14->setIconSize(QSize(27, 27));
-        lineEdit_3 = new QLineEdit(tab);
-        lineEdit_3->setObjectName("lineEdit_3");
-        lineEdit_3->setGeometry(QRect(820, 390, 161, 31));
-        lineEdit_3->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
-"                            border: 2px solid #4CAF50;\n"
-"                            border-radius: 10px;\n"
-"                            padding: 5px;\n"
-"                            background-color: #f0f0f0;\n"
-"	                        border-color: rgb(68, 176, 112);\n"
-"                            color: #333;\n"
-"                            }"));
+        QIcon icon5;
+        icon5.addFile(QString::fromUtf8("../../Downloads/461508595_825905609429817_3860263783025879477_n-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::On);
+        pushButton_10->setIcon(icon5);
+        pushButton_10->setIconSize(QSize(27, 27));
+        pushButton_2 = new QPushButton(tab);
+        pushButton_2->setObjectName("pushButton_2");
+        pushButton_2->setGeometry(QRect(760, 110, 204, 44));
+        pushButton_2->setFont(font2);
+        pushButton_2->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"    color: black;\n"
+"    background-color: rgb(68, 176, 112);\n"
+"    font-size: 18px;\n"
+"    line-height: 1.5;\n"
+"    width: 200px;\n"
+"    height: 40px;\n"
+"    opacity: 0.65;\n"
+"    text-align: center;\n"
+"    \n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-color: #097C36; /* Couleur de la bordure modifi\303\251e */\n"
+"    \n"
+"    border-radius: 10px;\n"
+"}"));
+        QIcon icon6;
+        icon6.addFile(QString::fromUtf8("../../Downloads/moins-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_2->setIcon(icon6);
+        pushButton_2->setIconSize(QSize(30, 50));
         tabWidget->addTab(tab, QString());
         label_9->raise();
         pushButton_11->raise();
-        pushButton_12->raise();
-        pushButton_13->raise();
+        pushButton_stat->raise();
+        pushButton_recherche->raise();
         groupBox->raise();
+        pushButton_pdf->raise();
+        tableWidget_2->raise();
+        lineEdit_rech->raise();
+        tableView->raise();
+        lineEdit_3->raise();
+        comboBox_tri->raise();
+        comboBox_rech->raise();
+        label_7->raise();
+        lineEdit_idpdf->raise();
+        addbutton->raise();
         pushButton_10->raise();
         pushButton_2->raise();
-        pushButton_5->raise();
-        tableWidget_2->raise();
-        lineEdit_2->raise();
-        addbutton->raise();
-        tableView->raise();
-        pushButton_14->raise();
-        lineEdit_3->raise();
+        pushButton->raise();
+        label_10->raise();
         tab_4 = new QWidget();
         tab_4->setObjectName("tab_4");
         label_21 = new QLabel(tab_4);
@@ -572,13 +617,13 @@ public:
         tab_3->setObjectName("tab_3");
         label_17 = new QLabel(tab_3);
         label_17->setObjectName("label_17");
-        label_17->setGeometry(QRect(0, -10, 1211, 591));
+        label_17->setGeometry(QRect(-10, 10, 1211, 591));
         label_17->setPixmap(QPixmap(QString::fromUtf8("../../Pictures/Screenshots/Capture d'\303\251cran 2024-10-07 191245.png")));
         label_17->setScaledContents(true);
-        pushButton_3 = new QPushButton(tab_3);
-        pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setGeometry(QRect(110, 230, 111, 71));
-        pushButton_3->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+        send = new QPushButton(tab_3);
+        send->setObjectName("send");
+        send->setGeometry(QRect(420, 300, 111, 31));
+        send->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "    color: black;\n"
 "    background-color: rgb(68, 176, 112);\n"
 "    font-size: 20px;\n"
@@ -596,19 +641,8 @@ public:
 "}"));
         QIcon icon8;
         icon8.addFile(QString::fromUtf8("../../Downloads/Capture_d_\303\251cran_2024-10-07_213823-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::On);
-        pushButton_3->setIcon(icon8);
-        pushButton_3->setIconSize(QSize(70, 70));
-        label_18 = new QLabel(tab_3);
-        label_18->setObjectName("label_18");
-        label_18->setGeometry(QRect(130, 310, 81, 20));
-        label_79 = new QLabel(tab_3);
-        label_79->setObjectName("label_79");
-        label_79->setGeometry(QRect(350, 20, 711, 411));
-        label_79->setPixmap(QPixmap(QString::fromUtf8("../../Downloads/Sans titre - 3.png")));
-        label_79->setScaledContents(true);
-        textEdit = new QTextEdit(tab_3);
-        textEdit->setObjectName("textEdit");
-        textEdit->setGeometry(QRect(360, 30, 691, 391));
+        send->setIcon(icon8);
+        send->setIconSize(QSize(70, 70));
         label_19 = new QLabel(tab_3);
         label_19->setObjectName("label_19");
         label_19->setGeometry(QRect(50, 60, 251, 41));
@@ -616,7 +650,35 @@ public:
         label_19->setScaledContents(true);
         label_20 = new QLabel(tab_3);
         label_20->setObjectName("label_20");
-        label_20->setGeometry(QRect(70, 70, 301, 20));
+        label_20->setGeometry(QRect(30, 20, 301, 20));
+        email = new QLineEdit(tab_3);
+        email->setObjectName("email");
+        email->setGeometry(QRect(300, 90, 361, 31));
+        nomProduit = new QLineEdit(tab_3);
+        nomProduit->setObjectName("nomProduit");
+        nomProduit->setGeometry(QRect(300, 190, 361, 31));
+        dateExpiration = new QDateEdit(tab_3);
+        dateExpiration->setObjectName("dateExpiration");
+        dateExpiration->setGeometry(QRect(300, 240, 361, 31));
+        nom = new QLineEdit(tab_3);
+        nom->setObjectName("nom");
+        nom->setGeometry(QRect(300, 140, 361, 31));
+        label_13 = new QLabel(tab_3);
+        label_13->setObjectName("label_13");
+        label_13->setGeometry(QRect(110, 100, 131, 21));
+        label_13->setFont(font1);
+        label_14 = new QLabel(tab_3);
+        label_14->setObjectName("label_14");
+        label_14->setGeometry(QRect(110, 140, 131, 21));
+        label_14->setFont(font1);
+        label_18 = new QLabel(tab_3);
+        label_18->setObjectName("label_18");
+        label_18->setGeometry(QRect(110, 190, 131, 21));
+        label_18->setFont(font1);
+        label_26 = new QLabel(tab_3);
+        label_26->setObjectName("label_26");
+        label_26->setGeometry(QRect(110, 240, 131, 21));
+        label_26->setFont(font1);
         tabWidget->addTab(tab_3, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName("tab_2");
@@ -643,16 +705,13 @@ public:
         label_78->setGeometry(QRect(140, 70, 811, 361));
         label_78->setPixmap(QPixmap(QString::fromUtf8("../../Downloads/Sans titre - 3.png")));
         label_78->setScaledContents(true);
-        label_26 = new QLabel(tab_2);
-        label_26->setObjectName("label_26");
-        label_26->setGeometry(QRect(990, 270, 91, 20));
-        pushButton_6 = new QPushButton(tab_2);
-        pushButton_6->setObjectName("pushButton_6");
-        pushButton_6->setGeometry(QRect(980, 190, 101, 71));
-        pushButton_6->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+        showStatsForMen = new QPushButton(tab_2);
+        showStatsForMen->setObjectName("showStatsForMen");
+        showStatsForMen->setGeometry(QRect(80, 70, 121, 28));
+        showStatsForMen->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "    color: black;\n"
 "    background-color: rgb(68, 176, 112);\n"
-"    font-size: 20px;\n"
+"    font-size: 18px;\n"
 "    line-height: 1.5;\n"
 "    width: 200px;\n"
 "    height: 40px;\n"
@@ -660,21 +719,52 @@ public:
 "    text-align: center;\n"
 "    \n"
 "    border-style: solid;\n"
-"    border-width: 2px; /* vous pouvez ajuster l'\303\251paisseur de la bordure */\n"
-"    border-color: black; /* couleur de la bordure */\n"
+"    border-width: 2px;\n"
+"    border-color: #097C36; /* Couleur de la bordure modifi\303\251e */\n"
 "    \n"
-"    border-radius: 10px; /* ajustez cette valeur pour arrondir plus ou moins */\n"
+"    border-radius: 10px;\n"
 "}"));
-        pushButton_6->setIcon(icon7);
-        pushButton_6->setIconSize(QSize(80, 80));
+        showStatsForWomen = new QPushButton(tab_2);
+        showStatsForWomen->setObjectName("showStatsForWomen");
+        showStatsForWomen->setGeometry(QRect(620, 80, 131, 28));
+        showStatsForWomen->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"    color: black;\n"
+"    background-color: rgb(68, 176, 112);\n"
+"    font-size: 18px;\n"
+"    line-height: 1.5;\n"
+"    width: 200px;\n"
+"    height: 40px;\n"
+"    opacity: 0.65;\n"
+"    text-align: center;\n"
+"    \n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-color: #097C36; /* Couleur de la bordure modifi\303\251e */\n"
+"    \n"
+"    border-radius: 10px;\n"
+"}"));
+        horizontalLayoutWidget = new QWidget(tab_2);
+        horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
+        horizontalLayoutWidget->setGeometry(QRect(80, 130, 441, 291));
+        horizontalLayout_1 = new QHBoxLayout(horizontalLayoutWidget);
+        horizontalLayout_1->setObjectName("horizontalLayout_1");
+        horizontalLayout_1->setContentsMargins(0, 0, 0, 0);
+        horizontalLayoutWidget_2 = new QWidget(tab_2);
+        horizontalLayoutWidget_2->setObjectName("horizontalLayoutWidget_2");
+        horizontalLayoutWidget_2->setGeometry(QRect(620, 130, 441, 291));
+        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget_2);
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
         tabWidget->addTab(tab_2, QString());
         label_11->raise();
         label_78->raise();
         label_12->raise();
         label_15->raise();
         label_16->raise();
-        label_26->raise();
-        pushButton_6->raise();
+        showStatsForMen->raise();
+        showStatsForWomen->raise();
+        horizontalLayoutWidget->raise();
+        horizontalLayoutWidget_2->raise();
         tabWidget_2->addTab(tab_8, QString());
         tab_9 = new QWidget();
         tab_9->setObjectName("tab_9");
@@ -700,7 +790,7 @@ public:
         retranslateUi(MainWindow);
 
         tabWidget_2->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -710,8 +800,8 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         pushButton_11->setText(QCoreApplication::translate("MainWindow", "Supprimer", nullptr));
-        pushButton_12->setText(QCoreApplication::translate("MainWindow", "Trier", nullptr));
-        pushButton_13->setText(QString());
+        pushButton_stat->setText(QCoreApplication::translate("MainWindow", "Statistique", nullptr));
+        pushButton_recherche->setText(QString());
         groupBox->setTitle(QCoreApplication::translate("MainWindow", " Ajout Produits", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "ID Produit :", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Libell\303\251      :", nullptr));
@@ -719,7 +809,7 @@ public:
         label_4->setText(QCoreApplication::translate("MainWindow", "Disponibilit\303\251 :", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "Date d'expiration :", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "Cat\303\251gorie :", nullptr));
-        categorieAjout->setItemText(0, QCoreApplication::translate("MainWindow", "M\303\251dicament sur ordonnance )", nullptr));
+        categorieAjout->setItemText(0, QCoreApplication::translate("MainWindow", "M\303\251dicament sur ordonnance", nullptr));
         categorieAjout->setItemText(1, QCoreApplication::translate("MainWindow", "M\303\251dicament en ventre libre ", nullptr));
         categorieAjout->setItemText(2, QCoreApplication::translate("MainWindow", "Produit de soins pour b\303\251b\303\251 ", nullptr));
         categorieAjout->setItemText(3, QCoreApplication::translate("MainWindow", "Produit de soins personnel", nullptr));
@@ -727,9 +817,7 @@ public:
         checkBox->setText(QCoreApplication::translate("MainWindow", "En stock", nullptr));
         checkBox_3->setText(QCoreApplication::translate("MainWindow", "En rupture", nullptr));
         label_8->setText(QString());
-        pushButton_10->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Annuler  ", nullptr));
-        pushButton_5->setText(QCoreApplication::translate("MainWindow", "  Exporter le format PDF  ", nullptr));
+        pushButton_pdf->setText(QCoreApplication::translate("MainWindow", "  Exporter PDF  ", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget_2->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "ID", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget_2->horizontalHeaderItem(1);
@@ -795,11 +883,24 @@ public:
         ___qtablewidgetitem29->setText(QCoreApplication::translate("MainWindow", "M\303\251dicament en vente libre", nullptr));
         tableWidget_2->setSortingEnabled(__sortingEnabled);
 
-        lineEdit_2->setText(QCoreApplication::translate("MainWindow", "ENTRER LE LIBELLE DU PRODUIT ", nullptr));
+        lineEdit_rech->setText(QString());
+        lineEdit_rech->setPlaceholderText(QCoreApplication::translate("MainWindow", "Recherche", nullptr));
         label_9->setText(QString());
-        addbutton->setText(QCoreApplication::translate("MainWindow", "Ajouter  ", nullptr));
-        pushButton_14->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
         lineEdit_3->setText(QString());
+        comboBox_tri->setItemText(0, QCoreApplication::translate("MainWindow", "libelle croissants", nullptr));
+        comboBox_tri->setItemText(1, QCoreApplication::translate("MainWindow", "libelle decroissants", nullptr));
+        comboBox_tri->setItemText(2, QCoreApplication::translate("MainWindow", "prix croissants", nullptr));
+        comboBox_tri->setItemText(3, QCoreApplication::translate("MainWindow", "prix decroissants", nullptr));
+
+        comboBox_rech->setItemText(0, QCoreApplication::translate("MainWindow", "Libelle", nullptr));
+        comboBox_rech->setItemText(1, QCoreApplication::translate("MainWindow", "Disponibilite", nullptr));
+
+        label_7->setText(QCoreApplication::translate("MainWindow", "Trier Par :", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "Rafraishir", nullptr));
+        label_10->setText(QCoreApplication::translate("MainWindow", "Recherche :", nullptr));
+        addbutton->setText(QCoreApplication::translate("MainWindow", "Ajouter  ", nullptr));
+        pushButton_10->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Annuler  ", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Acceuil", nullptr));
         label_21->setText(QString());
         label_22->setText(QString());
@@ -810,51 +911,21 @@ public:
         label_25->setText(QCoreApplication::translate("MainWindow", "Explorer", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("MainWindow", "Etat ", nullptr));
         label_17->setText(QString());
-        pushButton_3->setText(QString());
-        label_18->setText(QCoreApplication::translate("MainWindow", "Envoyer", nullptr));
-        label_79->setText(QString());
-        textEdit->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Bahnschrift Light'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt; font-weight:700;\">Objet :</span><span style=\" font-size:9pt;\"> Alerte \342\200\223 Proche expiration du m\303\251dicament [Nom du produit]</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; mar"
-                        "gin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Bonjour [Pr\303\251nom],</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">En tant qu'administrateur, je tiens \303\240 t'informer que le m\303\251dicament [Libell\303\251 du m\303\251dicament], lot identifiant [ID du lot], arrivera bient\303\264t \303\240 sa date d'expiration, fix\303\251e au [Date d\342\200\231expiration].</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block"
-                        "-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Merci de v\303\251rifier ce produit en stock et de prendre les mesures n\303\251cessaires, telles que :</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">- Le retrait du produit des \303\251tag\303\250res si besoin.</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">- La gestion des \303\251ventuels retours ou promotions pour \303\251couler les stocks restants avant cette date.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Si "
-                        "tu as des questions ou besoin de pr\303\251cisions suppl\303\251mentaires, je reste \303\240 ta disposition.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Merci pour ta vigilance et ton action rapide.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Cordialement,</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size"
-                        ":9pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">[Nom de l\342\200\231administrateur]  </span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Administrateur  </span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">[Nom de la pharmacie]  </span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">[Coordonn\303\251es de contact]</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"><br /></p></body></html>", nullptr));
+        send->setText(QCoreApplication::translate("MainWindow", "Envoyer", nullptr));
         label_19->setText(QString());
         label_20->setText(QCoreApplication::translate("MainWindow", "Le message \303\240 envoyer :", nullptr));
+        label_13->setText(QCoreApplication::translate("MainWindow", "Email :", nullptr));
+        label_14->setText(QCoreApplication::translate("MainWindow", "Nom :", nullptr));
+        label_18->setText(QCoreApplication::translate("MainWindow", "Nom de Produit:", nullptr));
+        label_26->setText(QCoreApplication::translate("MainWindow", "Date d'expiration:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Notifications", nullptr));
         label_11->setText(QString());
         label_12->setText(QString());
-        label_15->setText(QCoreApplication::translate("MainWindow", "Les produits les plus demand\303\251s durant ce trimestre :", nullptr));
+        label_15->setText(QCoreApplication::translate("MainWindow", "Etat du produit le plus demand\303\251 selon le genre :", nullptr));
         label_16->setText(QString());
         label_78->setText(QString());
-        label_26->setText(QCoreApplication::translate("MainWindow", "Explorer", nullptr));
-        pushButton_6->setText(QString());
+        showStatsForMen->setText(QCoreApplication::translate("MainWindow", "Homme", nullptr));
+        showStatsForWomen->setText(QCoreApplication::translate("MainWindow", "Femme", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Statistiques", nullptr));
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_8), QCoreApplication::translate("MainWindow", "Gestion produits", nullptr));
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_9), QCoreApplication::translate("MainWindow", "Gestion clients", nullptr));

@@ -1,8 +1,8 @@
 #include "produit.h"
 #include <QSqlQuery>
 #include <QObject>
-#include <QSqlQuery>
 #include <QSqlError>
+#include <QDebug>
 
 Produit::Produit(){
     ID = 0 ;
@@ -41,9 +41,11 @@ void Produit::setDisponibilite(QString disponibilite){this->disponibilite = disp
 //  CRUD
 
 bool Produit::ajouter() {
+
     QSqlQuery query;
     QString dateS = dateExpiration.toString("dd-MM-yyyy"); // Changed to match SQL format
     QString idString = QString::number(ID); // Convert ID to QString for consistency
+    QString prixStr = QString::number(prix);
 
     // Debugging output
     qDebug() << "ID being inserted:" << idString; // Check ID value before executing
@@ -58,7 +60,7 @@ bool Produit::ajouter() {
     query.bindValue(":categorie", categorie);
     query.bindValue(":disponibilite", disponibilite);
     query.bindValue(":libelle", libelle);
-    query.bindValue(":prix", prix);
+    query.bindValue(":prix", prixStr);
 
     // Execute the query and return the result
     if (!query.exec()) {
@@ -87,7 +89,7 @@ QSqlQueryModel * Produit::afficher(){
     model->setHeaderData(5,Qt::Horizontal,QObject::tr("PRIX"));
     model->setHeaderData(4,Qt::Horizontal,QObject::tr("LIBELLE"));
     model->setHeaderData(1,Qt::Horizontal,QObject::tr("DISPONIBILITE"));
- model->setHeaderData(2,Qt::Horizontal,QObject::tr("CATEGORIE"));
+    model->setHeaderData(2,Qt::Horizontal,QObject::tr("CATEGORIE"));
     return model ;
 
 }
@@ -127,8 +129,151 @@ bool Produit::modifier() {
     return true; // Return true if the query executes successfully
 }
 
+// ## Recherche ## //
+
+QSqlQueryModel *Produit::afficher_libelle(QString ch)
+{
+    QSqlQueryModel * model =new QSqlQueryModel();
+    model->setQuery("SELECT * FROM GESTIONPRODUITS where libelle = '"+ch+"' ");
+
+    model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID"));
 
 
+    model->setHeaderData(3,Qt::Horizontal,QObject::tr("DATEEXPIRATION"));
+    model->setHeaderData(5,Qt::Horizontal,QObject::tr("PRIX"));
+    model->setHeaderData(4,Qt::Horizontal,QObject::tr("LIBELLE"));
+    model->setHeaderData(1,Qt::Horizontal,QObject::tr("DISPONIBILITE"));
+    model->setHeaderData(2,Qt::Horizontal,QObject::tr("CATEGORIE"));
+    return model ;
+}
+QSqlQueryModel *Produit::afficher_disponibilite(QString ch)
+{
+    QSqlQueryModel * model =new QSqlQueryModel();
+    model->setQuery("SELECT * FROM GESTIONPRODUITS where DISPONIBILITE = '"+ch+"' ");
+
+    model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID"));
+
+
+    model->setHeaderData(3,Qt::Horizontal,QObject::tr("DATEEXPIRATION"));
+    model->setHeaderData(5,Qt::Horizontal,QObject::tr("PRIX"));
+    model->setHeaderData(4,Qt::Horizontal,QObject::tr("LIBELLE"));
+    model->setHeaderData(1,Qt::Horizontal,QObject::tr("DISPONIBILITE"));
+    model->setHeaderData(2,Qt::Horizontal,QObject::tr("CATEGORIE"));
+    return model ;
+}
+
+// ## Tri ## //
+
+QSqlQueryModel *Produit:: afficher_choix(QString choix)
+{
+    QSqlQueryModel * model =new QSqlQueryModel();
+
+    if(choix=="libelle croissants")
+    {
+        model->setQuery("SELECT * FROM GESTIONPRODUITS ORDER BY libelle ASC");
+
+        model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID"));
+
+
+        model->setHeaderData(3,Qt::Horizontal,QObject::tr("DATEEXPIRATION"));
+        model->setHeaderData(5,Qt::Horizontal,QObject::tr("PRIX"));
+        model->setHeaderData(4,Qt::Horizontal,QObject::tr("LIBELLE"));
+        model->setHeaderData(1,Qt::Horizontal,QObject::tr("DISPONIBILITE"));
+        model->setHeaderData(2,Qt::Horizontal,QObject::tr("CATEGORIE"));
+    }
+    else if(choix=="libelle decroissants")
+    {
+        model->setQuery("SELECT * FROM GESTIONPRODUITS ORDER BY libelle DESC");
+
+        model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID"));
+
+
+        model->setHeaderData(3,Qt::Horizontal,QObject::tr("DATEEXPIRATION"));
+        model->setHeaderData(5,Qt::Horizontal,QObject::tr("PRIX"));
+        model->setHeaderData(4,Qt::Horizontal,QObject::tr("LIBELLE"));
+        model->setHeaderData(1,Qt::Horizontal,QObject::tr("DISPONIBILITE"));
+        model->setHeaderData(2,Qt::Horizontal,QObject::tr("CATEGORIE"));
+    }
+    else if(choix=="prix decroissants")
+    {
+        model->setQuery("SELECT * FROM GESTIONPRODUITS ORDER BY prix DESC");
+
+        model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID"));
+
+
+        model->setHeaderData(3,Qt::Horizontal,QObject::tr("DATEEXPIRATION"));
+        model->setHeaderData(5,Qt::Horizontal,QObject::tr("PRIX"));
+        model->setHeaderData(4,Qt::Horizontal,QObject::tr("LIBELLE"));
+        model->setHeaderData(1,Qt::Horizontal,QObject::tr("DISPONIBILITE"));
+        model->setHeaderData(2,Qt::Horizontal,QObject::tr("CATEGORIE"));
+    }
+    else if(choix=="prix croissants")
+    {
+        model->setQuery("SELECT * FROM GESTIONPRODUITS ORDER BY prix ASC");
+
+        model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID"));
+
+
+        model->setHeaderData(3,Qt::Horizontal,QObject::tr("DATEEXPIRATION"));
+        model->setHeaderData(5,Qt::Horizontal,QObject::tr("PRIX"));
+        model->setHeaderData(4,Qt::Horizontal,QObject::tr("LIBELLE"));
+        model->setHeaderData(1,Qt::Horizontal,QObject::tr("DISPONIBILITE"));
+        model->setHeaderData(2,Qt::Horizontal,QObject::tr("CATEGORIE"));
+
+    }
+    return model ;
+}
+
+// ## Statistique ## //
+
+int Produit::statistique1(){
+    int count = 0;
+
+    QSqlQuery requete("SELECT * FROM GESTIONPRODUITS WHERE disponibilite like 'In Stock' ");
+
+    while(requete.next()) {
+        count++;
+    }
+
+    return count;
+}
+
+
+int Produit::statistique2(){
+    int count = 0;
+
+    QSqlQuery requete("SELECT * FROM GESTIONPRODUITS WHERE disponibilite like 'Out of Stock' ");
+
+    while(requete.next()) {
+        count++;
+    }
+
+    return count;
+}
+
+// ## PDF ## //
+
+Produit* Produit::readproduit(QString val)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM GESTIONPRODUITS WHERE id = :val");
+
+    query.bindValue(":val", val);
+
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            setID(query.value(0).toInt());
+            setDateExpiration(query.value(1).toDate());
+            setCategorie(query.value(2).toString());
+            setDisponibilite(query.value(3).toString());
+            setLibelle(query.value(4).toString());
+            setPrix(query.value(5).toFloat());
+        }
+    }
+    return this;
+}
 
 
 

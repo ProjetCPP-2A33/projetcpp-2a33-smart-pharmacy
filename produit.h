@@ -33,6 +33,20 @@ public:
     QSqlQueryModel * afficher();
     bool modifier();
 
+    /*Recherche*/
+    QSqlQueryModel *afficher_libelle(QString ch);
+    QSqlQueryModel *afficher_disponibilite(QString ch);
+
+    /*Tri*/
+    QSqlQueryModel *afficher_choix(QString choix);
+
+    /*Statistique*/
+    int statistique1();
+    int statistique2();
+
+    /*PDF*/
+    Produit* readproduit (QString val);
+
 private :
     int ID ;
     QString libelle ;
@@ -40,6 +54,7 @@ private :
     QDate dateExpiration ;
     QString categorie ;
     QString disponibilite ;
+
 
 };
 

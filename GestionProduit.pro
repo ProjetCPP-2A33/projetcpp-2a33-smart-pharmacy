@@ -1,5 +1,5 @@
 QT       += core gui
-QT += sql
+QT += sql charts multimedia multimediawidgets printsupport widgets axcontainer network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,15 +13,18 @@ SOURCES += \
     connection.cpp \
     main.cpp \
     mainwindow.cpp \
-    produit.cpp
+    produit.cpp \
+    statistique.cpp
 
 HEADERS += \
     connection.h \
     mainwindow.h \
-    produit.h
+    produit.h \
+    statistique.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    statistique.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

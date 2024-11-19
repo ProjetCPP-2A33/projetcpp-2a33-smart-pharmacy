@@ -24,6 +24,24 @@ private slots:
 
     void on_pushButton_10_clicked();
 
+    void on_pushButton_stat_clicked();
+
+    void on_comboBox_tri_activated(int index);
+
+    void on_pushButton_recherche_clicked();
+
+    void on_pushButton_pdf_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_send_clicked();
+
+
+    void on_showStatsForMen_clicked();
+
+    void on_showStatsForWomen_clicked();
+    void showPieChart(const QString &genre, QLayout *layout);
+
 private:
     Ui::MainWindow *ui;
 
