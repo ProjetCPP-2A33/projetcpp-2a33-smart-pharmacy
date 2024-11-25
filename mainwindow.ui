@@ -43,7 +43,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -703,6 +703,29 @@
         </property>
         <property name="text">
          <string>historique</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="arduino">
+        <property name="geometry">
+         <rect>
+          <x>640</x>
+          <y>350</y>
+          <width>93</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>arduino</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="clientIdInput">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>440</y>
+          <width>113</width>
+          <height>26</height>
+         </rect>
         </property>
        </widget>
       </widget>

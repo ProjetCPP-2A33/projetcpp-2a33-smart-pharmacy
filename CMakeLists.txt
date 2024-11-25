@@ -10,15 +10,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find necessary Qt modules
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql Charts Network)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql Charts Network)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql Charts Network SerialPort)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql Charts Network SerialPort)
 
 # Add cURL include and library paths
 include_directories("C:/Users/yomna/Downloads/curl-win64-latest/curl-8.11.0_1-win64-mingw/include")
 link_directories("C:/Users/yomna/Downloads/curl-win64-latest/curl-8.11.0_1-win64-mingw/lib")
 
 # Define CURL_STATICLIB if using the static library
-# This should be done before creating the target
 add_definitions(-DCURL_STATICLIB)
 
 # Add Twilio headers and source
@@ -56,6 +55,7 @@ target_link_libraries(gestioncommande PRIVATE
     Qt${QT_VERSION_MAJOR}::Sql
     Qt${QT_VERSION_MAJOR}::Charts
     Qt${QT_VERSION_MAJOR}::Network
+    Qt${QT_VERSION_MAJOR}::SerialPort
     "C:/Users/yomna/Downloads/curl-win64-latest/curl-8.11.0_1-win64-mingw/lib/libcurl.a"
     ws2_32
     wldap32

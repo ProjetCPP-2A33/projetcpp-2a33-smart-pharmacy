@@ -12,7 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QCalendarWidget>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateEdit>
 #include <QtWidgets/QGroupBox>
@@ -82,13 +81,13 @@ public:
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout_graphique;
     QPushButton *pb_historique;
+    QPushButton *arduino;
+    QLineEdit *clientIdInput;
     QWidget *tab_3;
     QLabel *label_2;
     QPushButton *sendSMS;
     QLabel *label_6;
     QPlainTextEdit *contenu;
-    QCalendarWidget *calendarWidget;
-    QPushButton *pushButton_3;
     QWidget *tab_5;
     QWidget *tab_6;
     QWidget *tab_7;
@@ -455,6 +454,12 @@ public:
         pb_historique = new QPushButton(tab_2);
         pb_historique->setObjectName("pb_historique");
         pb_historique->setGeometry(QRect(930, 340, 141, 29));
+        arduino = new QPushButton(tab_2);
+        arduino->setObjectName("arduino");
+        arduino->setGeometry(QRect(640, 350, 93, 29));
+        clientIdInput = new QLineEdit(tab_2);
+        clientIdInput->setObjectName("clientIdInput");
+        clientIdInput->setGeometry(QRect(660, 440, 113, 26));
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName("tab_3");
@@ -472,12 +477,6 @@ public:
         contenu = new QPlainTextEdit(tab_3);
         contenu->setObjectName("contenu");
         contenu->setGeometry(QRect(30, 130, 291, 75));
-        calendarWidget = new QCalendarWidget(tab_3);
-        calendarWidget->setObjectName("calendarWidget");
-        calendarWidget->setGeometry(QRect(750, 90, 392, 236));
-        pushButton_3 = new QPushButton(tab_3);
-        pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setGeometry(QRect(900, 350, 141, 29));
         tabWidget->addTab(tab_3, QString());
         tabWidget_2->addTab(tab_4, QString());
         tab_5 = new QWidget();
@@ -501,7 +500,7 @@ public:
         retranslateUi(MainWindow);
 
         tabWidget_2->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -550,12 +549,12 @@ public:
         label->setText(QString());
         pushButton_statistiques->setText(QCoreApplication::translate("MainWindow", "statis", nullptr));
         pb_historique->setText(QCoreApplication::translate("MainWindow", "historique", nullptr));
+        arduino->setText(QCoreApplication::translate("MainWindow", "arduino", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Statistique", nullptr));
         label_2->setText(QString());
         sendSMS->setText(QCoreApplication::translate("MainWindow", "SMS", nullptr));
         label_6->setText(QString());
         contenu->setPlainText(QCoreApplication::translate("MainWindow", "ecrire un message", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("MainWindow", "calendrier", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Notification", nullptr));
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_4), QCoreApplication::translate("MainWindow", "Gestion des commandes", nullptr));
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Gestion des produits", nullptr));

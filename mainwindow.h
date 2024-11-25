@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "commande.h"
 #include <Qstring>
+#include <QSerialPort>
 
 
 namespace Ui {
@@ -29,6 +30,8 @@ private slots:
     void on_pb_historique_clicked();
     void envoyerSMS(const QString &destinataire, const QString &message);
     void on_sendSMS_clicked();
+    void on_arduino_clicked();
+
 
 private:
     Ui::MainWindow *ui;
@@ -36,7 +39,9 @@ private:
    void afficherCommandes();
     void afficherHistorique();
     void addToHistory(const QString &action, int idc);
+    bool isClientIdValid(const QString& clientId);
     // Ajoutez cette ligne dans la section des déclarations de votre classe MainWindow
+    QSerialPort *serialPort;
 
 };
 

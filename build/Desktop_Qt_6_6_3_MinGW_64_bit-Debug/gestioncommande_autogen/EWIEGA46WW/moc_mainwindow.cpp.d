@@ -196,6 +196,10 @@ C:/Users/yomna/OneDrive/Documents/gestioncommande/build/Desktop_Qt_6_6_3_MinGW_6
   C:/Qt_6_6/6.6.3/mingw_64/include/QtGui/qvectornd.h \
   C:/Qt_6_6/6.6.3/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt_6_6/6.6.3/mingw_64/include/QtGui/qwindowdefs_win.h \
+  C:/Qt_6_6/6.6.3/mingw_64/include/QtSerialPort/QSerialPort \
+  C:/Qt_6_6/6.6.3/mingw_64/include/QtSerialPort/qserialport.h \
+  C:/Qt_6_6/6.6.3/mingw_64/include/QtSerialPort/qserialportglobal.h \
+  C:/Qt_6_6/6.6.3/mingw_64/include/QtSerialPort/qtserialportexports.h \
   C:/Qt_6_6/6.6.3/mingw_64/include/QtSql/QSqlQuery \
   C:/Qt_6_6/6.6.3/mingw_64/include/QtSql/QSqlQueryModel \
   C:/Qt_6_6/6.6.3/mingw_64/include/QtSql/qsqldatabase.h \

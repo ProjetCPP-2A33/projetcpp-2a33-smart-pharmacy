@@ -21,9 +21,21 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    serialPort(new QSerialPort(this))
 {
     ui->setupUi(this);
+    connect(ui->arduino, &QPushButton::clicked, this, &::MainWindow::on_arduino_clicked);
+    serialPort->setPortName("COM3");
+    serialPort->setBaudRate(QSerialPort::Baud9600);
+    serialPort->setDataBits(QSerialPort::Data8);
+    serialPort->setParity(QSerialPort::NoParity);
+    serialPort->setStopBits(QSerialPort::OneStop);
+    serialPort->setFlowControl(QSerialPort::NoFlowControl);
+
+    if (!serialPort->open(QIODevice::WriteOnly)) {
+        qDebug() << "Erreur d'ouverture du port série :" << serialPort->errorString();
+    }
 
     // Définir les en-têtes de colonnes pour QTableWidget une seule fois
     ui->tableWidget->setColumnCount(5);
@@ -56,6 +68,7 @@ void MainWindow::afficherCommandes()
 }
 
 MainWindow::~MainWindow() {
+    serialPort->close();
     delete ui;
 }
 
@@ -94,8 +107,9 @@ void MainWindow::on_pushButton_5_clicked() {
         QMessageBox::information(nullptr, QObject::tr("OK"),
                                  QObject::tr("Ajout effectué\n"
                                              "Click Cancel to exit."), QMessageBox::Cancel);
-        afficherCommandes();  // Rafraîchir l'affichage après l'ajout réussi
         addToHistory("Ajout de la commande", idc);
+        afficherCommandes();  // Rafraîchir l'affichage après l'ajout réussi
+       // addToHistory("Ajout de la commande", idc);
     } else {
         QMessageBox::critical(nullptr, QObject::tr("Not OK"),
                               QObject::tr("Ajout non effectué.\n"
@@ -151,6 +165,7 @@ void MainWindow::on_pushButton_5_clicked() {
         if (!ui->comboBox->currentText().isEmpty()) {
             modePaiement = ui->comboBox->currentText();
         }
+         addToHistory("Modifier de la commande", idc);
 
         if (!ui->lineEdit_11->text().isEmpty()) {
             etat = ui->lineEdit_11->text();
@@ -368,5 +383,34 @@ void MainWindow::on_sendSMS_clicked()
 
     envoyerSMS(destinataire, message);
 
+}
+bool MainWindow::isClientIdValid(const QString& clientId) {
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(*) FROM client WHERE IDCL = :clientId");
+    query.bindValue(":clientId", clientId);
+
+    if (query.exec()) {
+        if (query.next()) {
+            return query.value(0).toInt() > 0; // Retourne true si l'ID existe
+        }
+    }
+    return false; // Retourne false si une erreur survient ou si l'ID n'existe pas
+}
+
+void MainWindow::on_arduino_clicked() {
+    QString clientId = ui->clientIdInput->text(); // Suppose que tu as une zone de texte pour saisir l'ID
+
+    if (isClientIdValid(clientId)) {
+        if (serialPort->isOpen()) {
+            serialPort->write("ouvrir"); // Commande pour activer le servomoteur
+            qDebug() << "Commande 'ouvrir' envoyée à l'Arduino.";
+            QMessageBox::information(this, "Succès", "L'ID est valide. Le servomoteur tourne.");
+        } else {
+            QMessageBox::critical(this, "Erreur", "Le port série n'est pas ouvert !");
+        }
+    } else {
+        // ID invalide, afficher un message d'erreur
+        QMessageBox::warning(this, "Erreur", "L'ID saisi n'existe pas dans la table 'client'.");
+    }
 }
 

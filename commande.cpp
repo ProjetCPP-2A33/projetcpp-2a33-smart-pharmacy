@@ -254,3 +254,4 @@ void Commande::addToHistory(const QString &action, int idc) {
 
     qDebug() << "Historique mis à jour : " << action << " pour ID " << idc;
 }
+
