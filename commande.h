@@ -52,7 +52,6 @@ public:
     QMap<QString, int> statistiquesParModePaiement();
     void exporterPDF(const QString &nomFichier, QAbstractItemModel *model);
     void addToHistory(const QString &action, int idc);
-    QDate ouvrirCalendrier();
 
 
 

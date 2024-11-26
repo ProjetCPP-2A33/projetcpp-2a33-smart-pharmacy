@@ -341,8 +341,8 @@ void MainWindow::on_pb_historique_clicked() {
 void MainWindow::envoyerSMS(const QString &destinataire, const QString &message)
 {
     // SID et auth token de Twilio
-    QString sid = "AC3d774920150677652a616de9643321c5";
-    QString authToken = "96634546fbb71bb477b20b5831c7b006";
+    QString sid = "";
+    QString authToken = "";
 
     // URL de l'API Twilio
     QString url = "https://api.twilio.com/2010-04-01/Accounts/" + sid + "/Messages.json";
