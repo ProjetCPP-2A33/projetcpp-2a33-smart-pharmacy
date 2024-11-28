@@ -2,9 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "arduinocommande.h"
 #include "commande.h"
 #include <Qstring>
 #include <QSerialPort>
+#include "arduinocommande.h"
 
 
 namespace Ui {
@@ -39,9 +41,10 @@ private:
    void afficherCommandes();
     void afficherHistorique();
     void addToHistory(const QString &action, int idc);
-    bool isClientIdValid(const QString& clientId);
+    bool isCommandeIdValid(const QString& commandeId);
     // Ajoutez cette ligne dans la section des déclarations de votre classe MainWindow
     QSerialPort *serialPort;
+    Arduino *arduino;
 
 };
 

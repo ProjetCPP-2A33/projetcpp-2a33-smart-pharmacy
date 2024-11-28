@@ -467,4 +467,5 @@ C:/Users/yomna/OneDrive/Documents/gestioncommande/build/Desktop_Qt_6_6_3_MinGW_6
   C:/Qt_6_6/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt_6_6/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h \
   C:/Qt_6_6/Tools/mingw1120_64/x86_64-w64-mingw32/include/wctype.h \
+  C:/Users/yomna/OneDrive/Documents/gestioncommande/arduinocommande.h \
   C:/Users/yomna/OneDrive/Documents/gestioncommande/commande.h

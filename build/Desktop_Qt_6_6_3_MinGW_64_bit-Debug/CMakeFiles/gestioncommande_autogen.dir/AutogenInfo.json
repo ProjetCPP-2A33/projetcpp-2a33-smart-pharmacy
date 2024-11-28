@@ -400,6 +400,12 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/Users/yomna/OneDrive/Documents/gestioncommande/arduinocommande.h",
+			"MU",
+			"EWIEGA46WW/moc_arduinocommande.cpp",
+			null
+		],
+		[
 			"C:/Users/yomna/OneDrive/Documents/gestioncommande/commande.h",
 			"MU",
 			"EWIEGA46WW/moc_commande.cpp",
@@ -508,6 +514,11 @@
 	"SETTINGS_FILE" : "C:/Users/yomna/OneDrive/Documents/gestioncommande/build/Desktop_Qt_6_6_3_MinGW_64_bit-Debug/CMakeFiles/gestioncommande_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"C:/Users/yomna/OneDrive/Documents/gestioncommande/arduinocommande.cpp",
+			"MU",
+			null
+		],
 		[
 			"C:/Users/yomna/OneDrive/Documents/gestioncommande/commande.cpp",
 			"MU",

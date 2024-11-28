@@ -1587,6 +1587,43 @@
 			"path" : "C:/Qt_6_6/6.6.3/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginAdditionalTargetInfo.cmake"
 		},
 		{
+			"isExternal" : true,
+			"path" : "C:/Qt_6_6/6.6.3/mingw_64/lib/cmake/Qt6SerialPort/Qt6SerialPortConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt_6_6/6.6.3/mingw_64/lib/cmake/Qt6SerialPort/Qt6SerialPortConfigVersionImpl.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt_6_6/6.6.3/mingw_64/lib/cmake/Qt6SerialPort/Qt6SerialPortConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt_6_6/Tools/CMake_64/share/cmake-3.29/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt_6_6/6.6.3/mingw_64/lib/cmake/Qt6SerialPort/Qt6SerialPortDependencies.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt_6_6/6.6.3/mingw_64/lib/cmake/Qt6SerialPort/Qt6SerialPortTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt_6_6/6.6.3/mingw_64/lib/cmake/Qt6SerialPort/Qt6SerialPortTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt_6_6/6.6.3/mingw_64/lib/cmake/Qt6SerialPort/Qt6SerialPortAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt_6_6/6.6.3/mingw_64/lib/cmake/Qt6SerialPort/Qt6SerialPortVersionlessTargets.cmake"
+		},
+		{
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Qt_6_6/Tools/CMake_64/share/cmake-3.29/Modules/GNUInstallDirs.cmake"

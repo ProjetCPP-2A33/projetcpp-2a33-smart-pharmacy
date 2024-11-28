@@ -19,22 +19,16 @@
 #include <QNetworkAccessManager>
 
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    serialPort(new QSerialPort(this))
+    arduino(new Arduino(this)) // Initialisation de l'objet Arduino
 {
     ui->setupUi(this);
-    connect(ui->arduino, &QPushButton::clicked, this, &::MainWindow::on_arduino_clicked);
-    serialPort->setPortName("COM3");
-    serialPort->setBaudRate(QSerialPort::Baud9600);
-    serialPort->setDataBits(QSerialPort::Data8);
-    serialPort->setParity(QSerialPort::NoParity);
-    serialPort->setStopBits(QSerialPort::OneStop);
-    serialPort->setFlowControl(QSerialPort::NoFlowControl);
 
-    if (!serialPort->open(QIODevice::WriteOnly)) {
-        qDebug() << "Erreur d'ouverture du port série :" << serialPort->errorString();
+    if (!arduino->ouvrirPort("COM4")) {
+        QMessageBox::critical(this, "Erreur", "Impossible d'ouvrir le port série.");
     }
 
     // Définir les en-têtes de colonnes pour QTableWidget une seule fois
@@ -384,10 +378,10 @@ void MainWindow::on_sendSMS_clicked()
     envoyerSMS(destinataire, message);
 
 }
-bool MainWindow::isClientIdValid(const QString& clientId) {
+bool MainWindow::isCommandeIdValid(const QString& commandeId) {
     QSqlQuery query;
-    query.prepare("SELECT COUNT(*) FROM client WHERE IDCL = :clientId");
-    query.bindValue(":clientId", clientId);
+    query.prepare("SELECT COUNT(*) FROM commande WHERE IDC = :commandeId");
+    query.bindValue(":commandeId", commandeId);
 
     if (query.exec()) {
         if (query.next()) {
@@ -396,21 +390,19 @@ bool MainWindow::isClientIdValid(const QString& clientId) {
     }
     return false; // Retourne false si une erreur survient ou si l'ID n'existe pas
 }
-
 void MainWindow::on_arduino_clicked() {
-    QString clientId = ui->clientIdInput->text(); // Suppose que tu as une zone de texte pour saisir l'ID
+    QString commandeId = ui->commandeIdInput->text(); // Suppose que tu as une zone de texte pour saisir l'ID
 
-    if (isClientIdValid(clientId)) {
-        if (serialPort->isOpen()) {
-            serialPort->write("ouvrir"); // Commande pour activer le servomoteur
-            qDebug() << "Commande 'ouvrir' envoyée à l'Arduino.";
-            QMessageBox::information(this, "Succès", "L'ID est valide. Le servomoteur tourne.");
+    if (isCommandeIdValid(commandeId)) {
+        if (arduino->estPortOuvert()) {
+            if (arduino->envoyerCommande("ouvrir")) {
+                QMessageBox::information(this, "Succès", "L'ID est valide. Le servomoteur tourne.");
+            }
         } else {
             QMessageBox::critical(this, "Erreur", "Le port série n'est pas ouvert !");
         }
     } else {
-        // ID invalide, afficher un message d'erreur
-        QMessageBox::warning(this, "Erreur", "L'ID saisi n'existe pas dans la table 'client'.");
+        QMessageBox::warning(this, "Erreur", "L'ID saisi n'existe pas dans la table 'commande'.");
     }
 }
 

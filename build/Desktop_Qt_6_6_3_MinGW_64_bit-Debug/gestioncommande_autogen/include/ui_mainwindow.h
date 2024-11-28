@@ -82,7 +82,7 @@ public:
     QVBoxLayout *verticalLayout_graphique;
     QPushButton *pb_historique;
     QPushButton *arduino;
-    QLineEdit *clientIdInput;
+    QLineEdit *commandeIdInput;
     QWidget *tab_3;
     QLabel *label_2;
     QPushButton *sendSMS;
@@ -439,7 +439,7 @@ public:
         tab_2->setObjectName("tab_2");
         label = new QLabel(tab_2);
         label->setObjectName("label");
-        label->setGeometry(QRect(0, -10, 1301, 571));
+        label->setGeometry(QRect(0, 0, 1301, 571));
         label->setPixmap(QPixmap(QString::fromUtf8("460640231_1322566308727208_3722229070046037089_n.png")));
         label->setScaledContents(true);
         pushButton_statistiques = new QPushButton(tab_2);
@@ -457,9 +457,9 @@ public:
         arduino = new QPushButton(tab_2);
         arduino->setObjectName("arduino");
         arduino->setGeometry(QRect(640, 350, 93, 29));
-        clientIdInput = new QLineEdit(tab_2);
-        clientIdInput->setObjectName("clientIdInput");
-        clientIdInput->setGeometry(QRect(660, 440, 113, 26));
+        commandeIdInput = new QLineEdit(tab_2);
+        commandeIdInput->setObjectName("commandeIdInput");
+        commandeIdInput->setGeometry(QRect(660, 440, 113, 26));
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName("tab_3");
