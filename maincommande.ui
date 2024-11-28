@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1328</width>
+    <height>687</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>0</y>
+      <width>1331</width>
+      <height>641</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 300 12pt &quot;Bahnschrift Light&quot;;</string>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>Gestion des commandes</string>
+     </attribute>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1321</width>
+        <height>601</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Acceuil</string>
+       </attribute>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>720</x>
+          <y>370</y>
+          <width>131</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+    color: black;
+ 
+	background-color: rgb(68, 176, 112);
+    font-size: 20px;
+    line-height: 1.5;
+    width: 200px;
+    height: 40px;
+    opacity: 0.65;
+    text-align: center;
+    
+    border-style: solid;
+    border-width: 2px; /* vous pouvez ajuster l'épaisseur de la bordure */
+    border-color: black; /* couleur de la bordure */
+    
+    border-radius: 10px; /* ajustez cette valeur pour arrondir plus ou moins */
+}</string>
+        </property>
+        <property name="text">
+         <string>Modifier</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normalon>../../../Downloads/461508595_825905609429817_3860263783025879477_n.png</normalon>
+         </iconset>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="geometry">
+         <rect>
+          <x>1100</x>
+          <y>100</y>
+          <width>141</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+    color: black;
+ 
+	background-color: rgb(68, 176, 112);
+    font-size: 20px;
+    line-height: 1.5;
+    width: 200px;
+    height: 40px;
+    opacity: 0.65;
+    text-align: center;
+    
+    border-style: solid;
+    border-width: 2px; /* vous pouvez ajuster l'épaisseur de la bordure */
+    border-color: black; /* couleur de la bordure */
+    
+    border-radius: 10px; /* ajustez cette valeur pour arrondir plus ou moins */
+}</string>
+        </property>
+        <property name="text">
+         <string>Trier</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normalon>../../../Downloads/461484528_521659267261567_8640738131585914016_n.png</normalon>
+         </iconset>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="geometry">
+         <rect>
+          <x>1010</x>
+          <y>370</y>
+          <width>121</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+    color: black;
+ 
+	background-color: rgb(68, 176, 112);
+    font-size: 20px;
+    line-height: 1.5;
+    width: 200px;
+    height: 40px;
+    opacity: 0.65;
+    text-align: center;
+    
+    border-style: solid;
+    border-width: 2px; /* vous pouvez ajuster l'épaisseur de la bordure */
+    border-color: black; /* couleur de la bordure */
+    
+    border-radius: 10px; /* ajustez cette valeur pour arrondir plus ou moins */
+}</string>
+        </property>
+        <property name="text">
+         <string>Supprimer</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normalon>../../../Downloads/460177168_1665954550921902_7047727999174566408_n.png</normalon>
+         </iconset>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>1200</x>
+          <y>0</y>
+          <width>111</width>
+          <height>81</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>../../../Downloads/458735584_918125840206881_8473109506372732198_n-removebg-preview.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_16">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>450</y>
+          <width>63</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_18">
+        <property name="geometry">
+         <rect>
+          <x>990</x>
+          <y>430</y>
+          <width>63</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="geometry">
+         <rect>
+          <x>640</x>
+          <y>100</y>
+          <width>141</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+    color: black;
+ 
+	background-color: rgb(68, 176, 112);
+    font-size: 20px;
+    line-height: 1.5;
+    width: 200px;
+    height: 40px;
+    opacity: 0.65;
+    text-align: center;
+    
+    border-style: solid;
+    border-width: 2px; /* vous pouvez ajuster l'épaisseur de la bordure */
+    border-color: black; /* couleur de la bordure */
+    
+    border-radius: 10px; /* ajustez cette valeur pour arrondir plus ou moins */
+}</string>
+        </property>
+        <property name="text">
+         <string>Rechercher</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normalon>../../../Downloads/460563423_1575797083314263_1051363182548254163_n.png</normalon>
+         </iconset>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_10">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>100</y>
+          <width>151</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+                            border: 2px solid #4CAF50;
+                            border-radius: 10px;
+                            padding: 5px;
+                            background-color: #f0f0f0;
+	                        border-color: #44B070;
+                            color: #333;
+                            }</string>
+        </property>
+        <property name="text">
+         <string>Entrer ID</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_9">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>470</y>
+          <width>201</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Exporter format pdf</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pb_pdf">
+        <property name="geometry">
+         <rect>
+          <x>670</x>
+          <y>450</y>
+          <width>71</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+    color: black;
+ 
+	background-color: rgb(68, 176, 112);
+    font-size: 20px;
+    line-height: 1.5;
+    width: 200px;
+    height: 40px;
+    opacity: 0.65;
+    text-align: center;
+    
+    border-style: solid;
+    border-width: 2px; /* vous pouvez ajuster l'épaisseur de la bordure */
+    border-color: black; /* couleur de la bordure */
+    
+    border-radius: 10px; /* ajustez cette valeur pour arrondir plus ou moins */
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>461512018_8583292871729025_1881610230410531967_n.png</normaloff>461512018_8583292871729025_1881610230410531967_n.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>-30</x>
+          <y>-10</y>
+          <width>1901</width>
+          <height>811</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>460640231_1322566308727208_3722229070046037089_n.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>60</y>
+          <width>411</width>
+          <height>401</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Ajouter une commande</string>
+        </property>
+        <widget class="QPushButton" name="pushButton_6">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>330</y>
+           <width>131</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+    color: black;
+ 
+	background-color: rgb(68, 176, 112);
+    font-size: 20px;
+    line-height: 1.5;
+    width: 200px;
+    height: 40px;
+    opacity: 0.65;
+    text-align: center;
+    
+    border-style: solid;
+    border-width: 2px; /* vous pouvez ajuster l'épaisseur de la bordure */
+    border-color: black; /* couleur de la bordure */
+    
+    border-radius: 10px; /* ajustez cette valeur pour arrondir plus ou moins */
+}</string>
+         </property>
+         <property name="text">
+          <string>Annuler</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>461766791_3474883789478601_5900950519127739335_n.png</normaloff>461766791_3474883789478601_5900950519127739335_n.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_5">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>330</y>
+           <width>121</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+    color: black;
+ 
+	background-color: rgb(68, 176, 112);
+    font-size: 20px;
+    line-height: 1.5;
+    width: 200px;
+    height: 40px;
+    opacity: 0.65;
+    text-align: center;
+    
+    border-style: solid;
+    border-width: 2px; /* vous pouvez ajuster l'épaisseur de la bordure */
+    border-color: black; /* couleur de la bordure */
+    
+    border-radius: 10px; /* ajustez cette valeur pour arrondir plus ou moins */
+}</string>
+         </property>
+         <property name="text">
+          <string>Ajouter</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>461755239_1311673180207872_9007432977068590092_n.png</normaloff>461755239_1311673180207872_9007432977068590092_n.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>50</y>
+           <width>233</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>ID:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_3">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>180</y>
+           <width>336</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>MontantTotal:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_3"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_4">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>230</y>
+           <width>380</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>ModePaiement:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox">
+            <item>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Virement banquaire</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Carte credit/Debit</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Cheque</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Especes</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_5">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>290</y>
+           <width>270</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Etat</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_11"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>110</y>
+           <width>167</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Date</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="dateEdit"/>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_12">
+        <property name="geometry">
+         <rect>
+          <x>870</x>
+          <y>370</y>
+          <width>131</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+                            border: 2px solid #4CAF50;
+                            border-radius: 10px;
+                            padding: 5px;
+                            background-color: #f0f0f0;
+	                        border-color: #44B070;
+                            color: #333;
+                            }</string>
+        </property>
+        <property name="text">
+         <string>Entrer ID</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="geometry">
+         <rect>
+          <x>580</x>
+          <y>150</y>
+          <width>641</width>
+          <height>192</height>
+         </rect>
+        </property>
+        <column>
+         <property name="text">
+          <string>idc</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>datec</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Nouvelle colonne</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>montantTotal</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>etat</string>
+         </property>
+        </column>
+       </widget>
+       <zorder>label_3</zorder>
+       <zorder>pushButton</zorder>
+       <zorder>pushButton_2</zorder>
+       <zorder>pushButton_4</zorder>
+       <zorder>label_11</zorder>
+       <zorder>label_16</zorder>
+       <zorder>label_18</zorder>
+       <zorder>pushButton_9</zorder>
+       <zorder>lineEdit_10</zorder>
+       <zorder>label_9</zorder>
+       <zorder>pb_pdf</zorder>
+       <zorder>groupBox</zorder>
+       <zorder>lineEdit_12</zorder>
+       <zorder>tableWidget</zorder>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Statistique</string>
+       </attribute>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1301</width>
+          <height>571</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>460640231_1322566308727208_3722229070046037089_n.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_statistiques">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>330</y>
+          <width>93</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>statis</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="verticalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>30</y>
+          <width>581</width>
+          <height>261</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_graphique"/>
+       </widget>
+       <widget class="QPushButton" name="pb_historique">
+        <property name="geometry">
+         <rect>
+          <x>930</x>
+          <y>340</y>
+          <width>141</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>historique</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="arduino">
+        <property name="geometry">
+         <rect>
+          <x>640</x>
+          <y>350</y>
+          <width>93</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>arduino</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="commandeIdInput">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>440</y>
+          <width>113</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Notification</string>
+       </attribute>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1301</width>
+          <height>571</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>460640231_1322566308727208_3722229070046037089_n.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="sendSMS">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>140</y>
+          <width>251</width>
+          <height>61</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>SMS</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>240</y>
+          <width>281</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPlainTextEdit" name="contenu">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>130</y>
+          <width>291</width>
+          <height>75</height>
+         </rect>
+        </property>
+        <property name="plainText">
+         <string>ecrire un message</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_5">
+     <attribute name="title">
+      <string>Gestion des produits</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tab_6">
+     <attribute name="title">
+      <string>Gestion des fournisseurs</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tab_7">
+     <attribute name="title">
+      <string>Gestion des clients</string>
+     </attribute>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1328</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

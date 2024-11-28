@@ -23,9 +23,9 @@ add_definitions(-DCURL_STATICLIB)
 # Add Twilio headers and source
 set(PROJECT_SOURCES
     main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
+    maincommande.cpp
+    maincommande.h
+    maincommande.ui
     commande.h
     commande.cpp
     connection.h

@@ -760,9 +760,9 @@ gestioncommande_autogen/timestamp: \
 	C:/Users/yomna/OneDrive/Documents/gestioncommande/connection.h \
 	C:/Users/yomna/OneDrive/Documents/gestioncommande/image.qrc \
 	C:/Users/yomna/OneDrive/Documents/gestioncommande/main.cpp \
-	C:/Users/yomna/OneDrive/Documents/gestioncommande/mainwindow.cpp \
-	C:/Users/yomna/OneDrive/Documents/gestioncommande/mainwindow.h \
+	C:/Users/yomna/OneDrive/Documents/gestioncommande/maincommande.cpp \
+	C:/Users/yomna/OneDrive/Documents/gestioncommande/maincommande.h \
 	C:/Users/yomna/OneDrive/Documents/gestioncommande/twilio.cpp \
 	C:/Users/yomna/OneDrive/Documents/gestioncommande/twilio.h \
-	C:/Users/yomna/OneDrive/Documents/gestioncommande/mainwindow.ui \
+	C:/Users/yomna/OneDrive/Documents/gestioncommande/maincommande.ui \
 	C:/Qt_6_6/Tools/CMake_64/bin/cmake.exe

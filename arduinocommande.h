@@ -1,5 +1,5 @@
-#ifndef ARDUINO_H
-#define ARDUINO_H
+#ifndef ARDUINOCOMMANDE_H
+#define ARDUINOCOMMANDE_H
 
 #include <QSerialPort>
 #include <QString>

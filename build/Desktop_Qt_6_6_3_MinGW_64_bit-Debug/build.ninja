@@ -65,9 +65,9 @@ build CMakeFiles/gestioncommande.dir/main.cpp.obj: CXX_COMPILER__gestioncommande
   OBJECT_DIR = CMakeFiles\gestioncommande.dir
   OBJECT_FILE_DIR = CMakeFiles\gestioncommande.dir
 
-build CMakeFiles/gestioncommande.dir/mainwindow.cpp.obj: CXX_COMPILER__gestioncommande_unscanned_Debug C$:/Users/yomna/OneDrive/Documents/gestioncommande/mainwindow.cpp || cmake_object_order_depends_target_gestioncommande
+build CMakeFiles/gestioncommande.dir/maincommande.cpp.obj: CXX_COMPILER__gestioncommande_unscanned_Debug C$:/Users/yomna/OneDrive/Documents/gestioncommande/maincommande.cpp || cmake_object_order_depends_target_gestioncommande
   DEFINES = -DCURL_STATICLIB -DMINGW_HAS_SECURE_API=1 -DQT_CHARTS_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NETWORK_LIB -DQT_OPENGLWIDGETS_LIB -DQT_OPENGL_LIB -DQT_SERIALPORT_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
-  DEP_FILE = CMakeFiles\gestioncommande.dir\mainwindow.cpp.obj.d
+  DEP_FILE = CMakeFiles\gestioncommande.dir\maincommande.cpp.obj.d
   FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
   INCLUDES = -IC:/Users/yomna/OneDrive/Documents/gestioncommande/build/Desktop_Qt_6_6_3_MinGW_64_bit-Debug/gestioncommande_autogen/include -IC:/Users/yomna/Downloads/curl-win64-latest/curl-8.11.0_1-win64-mingw/include -isystem C:/Qt_6_6/6.6.3/mingw_64/include/QtCore -isystem C:/Qt_6_6/6.6.3/mingw_64/include -isystem C:/Qt_6_6/6.6.3/mingw_64/mkspecs/win32-g++ -isystem C:/Qt_6_6/6.6.3/mingw_64/include/QtWidgets -isystem C:/Qt_6_6/6.6.3/mingw_64/include/QtGui -isystem C:/Qt_6_6/6.6.3/mingw_64/include/QtSql -isystem C:/Qt_6_6/6.6.3/mingw_64/include/QtCharts -isystem C:/Qt_6_6/6.6.3/mingw_64/include/QtOpenGL -isystem C:/Qt_6_6/6.6.3/mingw_64/include/QtOpenGLWidgets -isystem C:/Qt_6_6/6.6.3/mingw_64/include/QtNetwork -isystem C:/Qt_6_6/6.6.3/mingw_64/include/QtSerialPort
   OBJECT_DIR = CMakeFiles\gestioncommande.dir
@@ -121,7 +121,7 @@ build CMakeFiles/gestioncommande.dir/gestioncommande_autogen/EWIEGA46WW/qrc_imag
 #############################################
 # Link the executable gestioncommande.exe
 
-build gestioncommande.exe: CXX_EXECUTABLE_LINKER__gestioncommande_Debug CMakeFiles/gestioncommande.dir/gestioncommande_autogen/mocs_compilation.cpp.obj CMakeFiles/gestioncommande.dir/main.cpp.obj CMakeFiles/gestioncommande.dir/mainwindow.cpp.obj CMakeFiles/gestioncommande.dir/commande.cpp.obj CMakeFiles/gestioncommande.dir/connection.cpp.obj CMakeFiles/gestioncommande.dir/twilio.cpp.obj CMakeFiles/gestioncommande.dir/arduinocommande.cpp.obj CMakeFiles/gestioncommande.dir/gestioncommande_autogen/EWIEGA46WW/qrc_image.cpp.obj | C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Sql.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Charts.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Network.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6SerialPort.a C$:/Users/yomna/Downloads/curl-win64-latest/curl-8.11.0_1-win64-mingw/lib/libcurl.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6OpenGLWidgets.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Widgets.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6OpenGL.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Gui.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Core.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6EntryPoint.a || gestioncommande_autogen gestioncommande_autogen_timestamp_deps
+build gestioncommande.exe: CXX_EXECUTABLE_LINKER__gestioncommande_Debug CMakeFiles/gestioncommande.dir/gestioncommande_autogen/mocs_compilation.cpp.obj CMakeFiles/gestioncommande.dir/main.cpp.obj CMakeFiles/gestioncommande.dir/maincommande.cpp.obj CMakeFiles/gestioncommande.dir/commande.cpp.obj CMakeFiles/gestioncommande.dir/connection.cpp.obj CMakeFiles/gestioncommande.dir/twilio.cpp.obj CMakeFiles/gestioncommande.dir/arduinocommande.cpp.obj CMakeFiles/gestioncommande.dir/gestioncommande_autogen/EWIEGA46WW/qrc_image.cpp.obj | C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Sql.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Charts.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Network.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6SerialPort.a C$:/Users/yomna/Downloads/curl-win64-latest/curl-8.11.0_1-win64-mingw/lib/libcurl.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6OpenGLWidgets.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Widgets.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6OpenGL.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Gui.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Core.a C$:/Qt_6_6/6.6.3/mingw_64/lib/libQt6EntryPoint.a || gestioncommande_autogen gestioncommande_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = C:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Sql.a  C:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Charts.a  C:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Network.a  C:/Qt_6_6/6.6.3/mingw_64/lib/libQt6SerialPort.a  C:/Users/yomna/Downloads/curl-win64-latest/curl-8.11.0_1-win64-mingw/lib/libcurl.a  -lws2_32  -lwldap32  -lcrypt32  -ladvapi32  -lsecur32  C:/Qt_6_6/6.6.3/mingw_64/lib/libQt6OpenGLWidgets.a  C:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Widgets.a  C:/Qt_6_6/6.6.3/mingw_64/lib/libQt6OpenGL.a  C:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Gui.a  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -luser32  C:/Qt_6_6/6.6.3/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  C:/Qt_6_6/6.6.3/mingw_64/lib/libQt6EntryPoint.a  -lshell32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -209,7 +209,7 @@ build gestioncommande_autogen_timestamp_deps: phony
 #############################################
 # Utility command for gestioncommande_autogen
 
-build gestioncommande_autogen: phony CMakeFiles/gestioncommande_autogen gestioncommande_autogen/include/ui_mainwindow.h gestioncommande_autogen/timestamp gestioncommande_autogen/mocs_compilation.cpp gestioncommande_autogen_timestamp_deps
+build gestioncommande_autogen: phony CMakeFiles/gestioncommande_autogen gestioncommande_autogen/include/ui_maincommande.h gestioncommande_autogen/timestamp gestioncommande_autogen/mocs_compilation.cpp gestioncommande_autogen_timestamp_deps
 
 
 #############################################
@@ -235,7 +235,7 @@ build gestioncommande_autogen/EWIEGA46WW/qrc_image.cpp | ${cmake_ninja_workdir}g
 #############################################
 # Phony custom command for CMakeFiles\gestioncommande_autogen
 
-build CMakeFiles/gestioncommande_autogen gestioncommande_autogen/include/ui_mainwindow.h | ${cmake_ninja_workdir}CMakeFiles/gestioncommande_autogen ${cmake_ninja_workdir}gestioncommande_autogen/include/ui_mainwindow.h: phony gestioncommande_autogen/timestamp || gestioncommande_autogen_timestamp_deps
+build CMakeFiles/gestioncommande_autogen gestioncommande_autogen/include/ui_maincommande.h | ${cmake_ninja_workdir}CMakeFiles/gestioncommande_autogen ${cmake_ninja_workdir}gestioncommande_autogen/include/ui_maincommande.h: phony gestioncommande_autogen/timestamp || gestioncommande_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.

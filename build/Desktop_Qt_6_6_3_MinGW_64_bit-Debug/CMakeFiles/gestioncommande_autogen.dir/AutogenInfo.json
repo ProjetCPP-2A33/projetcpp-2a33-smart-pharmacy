@@ -418,9 +418,9 @@
 			null
 		],
 		[
-			"C:/Users/yomna/OneDrive/Documents/gestioncommande/mainwindow.h",
+			"C:/Users/yomna/OneDrive/Documents/gestioncommande/maincommande.h",
 			"MU",
-			"EWIEGA46WW/moc_mainwindow.cpp",
+			"EWIEGA46WW/moc_maincommande.cpp",
 			null
 		],
 		[
@@ -535,7 +535,7 @@
 			null
 		],
 		[
-			"C:/Users/yomna/OneDrive/Documents/gestioncommande/mainwindow.cpp",
+			"C:/Users/yomna/OneDrive/Documents/gestioncommande/maincommande.cpp",
 			"MU",
 			null
 		],
