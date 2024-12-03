@@ -12,6 +12,7 @@ private:
     int id;
     int gsm;
     int cin;
+    int nbrachat;
     QString nom;
     QString prenom;
     QString sexe;
@@ -21,7 +22,7 @@ private:
 public:
     //constructeurs
     Client();
-    Client(int id, int gsm, int cin, const QString &nom, const QString &prenom,const QString &sexe, const QString &allergies, const QString &adresse, const QString &mail);
+    Client(int id, int gsm, int cin,int nbrachat, const QString &nom, const QString &prenom,const QString &sexe, const QString &allergies, const QString &adresse, const QString &mail);
 
     //Getters
     QString getNom(){return nom;}
@@ -33,6 +34,8 @@ public:
     int getId(){return id;}
     int getGsm(){return gsm;}
     int getCin(){return cin;}
+    int getNbrachat(){return nbrachat;}
+
     //Setters
     void setNom(QString n){nom=n;}
     void setPrenom(QString p){prenom=p;}
@@ -43,13 +46,23 @@ public:
     void setId(int id){id=id;}
     void setGsm(int g){gsm=g;}
     void setCin(int c){cin=c;}
+    void setNbrachat(int nbr){nbrachat=nbr;}
+
     //Fonctionnalite de base relatives a l'entite client
     bool ajouter();
     QSqlQueryModel * afficher();
     bool supprimer(int id);
-    bool modifier(int id, int gsm,int cin, QString nom, QString prenom,QString sexe,QString allergies, QString adresse, QString mail);
+    bool modifier(int id, int gsm, int cin,int nbrachat, const QString& nom,const QString& prenom, const QString& sexe, const QString& allergies,const QString& adresse, const QString& mail);
     QSqlQueryModel * rechercher(int id);
-
+    bool existe(int id);
+    QSqlQueryModel* trierParNom();
+    QSqlQueryModel* rechercherParID(int id);
+    //historique
+    bool ajouterHistorique(int id, const QString& diagnostique, const QString& traitement, const QDate& datehm);
+    QSqlQueryModel* afficherHistorique();
+    //fidelite
+    QSqlQueryModel* getTopFideleClients();
+    QSqlQueryModel* afficherfidele();
 };
 
 #endif // CLIENT_H
