@@ -1,0 +1,10 @@
+release/Client.o
+release/arduino.o
+release/camembertdialog.o
+release/commande.o
+release/main.o
+release/mainwindow.o
+release/connection.o
+release/moc_arduino.o
+release/moc_camembertdialog.o
+release/moc_mainwindow.o

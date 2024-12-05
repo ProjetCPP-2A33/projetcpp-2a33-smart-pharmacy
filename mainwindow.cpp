@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Client.h"
+#include"commande.h"
 #include "CamembertDialog.h"
 #include <QMessageBox>
 #include <QRegularExpression>
@@ -22,6 +23,9 @@
 #include <QTableView>
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include <QSqlQueryModel>
+#include <QDesktopServices>
+#include <QNetworkAccessManager>
 
 
 MainWindow::~MainWindow()
@@ -34,8 +38,19 @@ MainWindow::~MainWindow()
 MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWindow), arduino(new Arduino(this)), model(new QStandardItemModel(this))
 {
     ui->setupUi(this);
+
+
+
     ui->tableView_2->setModel(client.afficher());
     ui->tableView_hm->setModel(client.afficherHistorique());
+    ui->tableWidget_2->setColumnCount(5);
+    QStringList headers = { "IDC", "Date", "Montant Total", "Mode Paiement", "État" };
+    ui->tableWidget_2->setHorizontalHeaderLabels(headers);
+    ui->lineEdit->clear(); // Initialise le champ vide
+
+
+    // Appeler la fonction afficherCommandes pour initialiser l'affichage
+    afficherCommandes();
 
     connect(ui->pushButton_modifier, &QPushButton::clicked, this, &MainWindow::on_pushButton_modifier_clicked);
     connect(ui->pushButton_fidele, &QPushButton::clicked, this, &MainWindow::on_pushButton_AddHistorique_clicked);
@@ -53,9 +68,16 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWind
     ui->tableView->setModel(model);
 
     // Connexion à l'Arduino
-    if (arduino->connectToArduino("COM9")) { // Remplacez "COM9" par votre port série
+    bool connected = arduino->connectToArduino("COM5"); // Tente d'ouvrir le port série
+    if (connected) {
         connect(arduino, &Arduino::idReceived, this, &MainWindow::handleIdReceived);
+        qDebug() << "Connexion et ouverture réussies.";
+    } else {
+        QMessageBox::critical(this, "Erreur", "Connexion à Arduino échouée.");
     }
+
+
+
 
 }
 
@@ -381,27 +403,40 @@ void MainWindow::afficherTopClients()
 //Arduino
 void MainWindow::handleIdReceived(const QString &id)
 {
+    // Vérifie si l'ID n'est pas vide
+    if (id.isEmpty()) {
+        ui->lineEdit->clear(); // Initialise le champ vide
+        return; // Ne rien faire si l'ID est vide
+    }
+
     // Affiche l'ID reçu dans le QLineEdit
     ui->lineEdit->setText(id);
 
-    // Vérifie l'état de l'ID dans la base de données
-    QString etat = chercherEtatDansBD(id);
+    // Vérifie si l'ID existe dans la base de données
+    if (isCommandeIdValid(id)) {
+        // Si l'ID est valide, vérifie l'état de la commande
+        QString etat = chercherEtatDansBD(id);
 
-    // Affiche l'état dans une QLabel
-    if (!etat.isEmpty()) {
-        QMessageBox::information(this, "État de la commande", "État : " + etat);
+        // Affiche l'état dans une QMessageBox
+        if (!etat.isEmpty()) {
+            QMessageBox::information(this, "État de la commande", "État : " + etat);
+        } else {
+            QMessageBox::warning(this, "Erreur", "État de la commande introuvable.");
+        }
     } else {
+        // Si l'ID n'existe pas dans la base de données, affiche un message d'erreur
         QMessageBox::warning(this, "Erreur", "ID non trouvé dans la base de données.");
     }
 
-    qDebug() << "ID reçu :" << id << ", État :" << etat;
+    qDebug() << "ID reçu :" << id;
 }
 
-QString MainWindow::chercherEtatDansBD(const QString &id)
+
+QString MainWindow::chercherEtatDansBD(const QString &idc)
 {
     QSqlQuery query;
-    query.prepare("SELECT etat FROM COMMANDES WHERE idc = :idc");
-    query.bindValue(":idc", id);
+    query.prepare("SELECT etat FROM COMMANDE WHERE idc = :idc");
+    query.bindValue(":idc", idc);
 
     if (query.exec() && query.next())
     {
@@ -409,5 +444,374 @@ QString MainWindow::chercherEtatDansBD(const QString &id)
     }
     return "";
 }
+void MainWindow::on_pushButton_12_clicked() {
+    int idc = ui->lineEdit_2->text().toInt();
+    QDate datec = ui->dateEdit->date();
+    double montantTotal = ui->lineEdit_4->text().toDouble();
+    QString modePaiement = ui->comboBox_2->currentText();
+    QString etat = ui->lineEdit_14->text();
+
+    // Contrôle de saisie pour l'ID
+    if (idc == 0) {
+        QMessageBox::warning(this, "Erreur", "L'ID ne peut pas être nul ou égal à zéro.");
+        return;
+    }
+
+    // Si le montant total n'est pas renseigné, on met une valeur par défaut (par exemple 0)
+    if (montantTotal < 0) {
+        QMessageBox::warning(this, "Erreur", "Le montant total ne peut pas être négatif.");
+        return;
+    }
+    if (ui->lineEdit_4->text().isEmpty()) {
+        montantTotal = 0;  // Valeur par défaut si le champ est vide
+    }
+
+    // Si l'état n'est pas renseigné, on met une valeur par défaut (par exemple "normal")
+    if (etat.isEmpty()) {
+        etat = "normal";  // Valeur par défaut si le champ est vide
+    }
+
+    // Créer une instance temporaire de Commande pour l'ajout
+    Commande Ctemp(idc, datec, montantTotal, modePaiement, etat);
+    bool test = Ctemp.ajouter();
+
+    if (test) {
+        QMessageBox::information(nullptr, QObject::tr("OK"),
+                                 QObject::tr("Ajout effectué\n"
+                                             "Click Cancel to exit."), QMessageBox::Cancel);
+        //addToHistory("Ajout de la commande", idc);
+        afficherCommandes();  // Rafraîchir l'affichage après l'ajout réussi
+        // addToHistory("Ajout de la commande", idc);
+    } else {
+        QMessageBox::critical(nullptr, QObject::tr("Not OK"),
+                              QObject::tr("Ajout non effectué.\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+}
+
+void MainWindow::afficherCommandes()
+{
+    // Vider le QTableWidget avant de le remplir à nouveau
+    ui->tableWidget_2->setRowCount(0);
+
+    // Créer une instance de Commande pour appeler afficher()
+    Commande Ctemp;
+    QSqlQueryModel* model = Ctemp.afficher();
+    //addToHistory("Affichage des commandes", 0);
+    //addToHistory("Affichage de la commande",idc);
+
+    // Remplir le QTableWidget avec les données du modèle
+    for (int row = 0; row < model->rowCount(); ++row) {
+        ui->tableWidget_2->insertRow(row); // Ajouter une nouvelle ligne
+        for (int col = 0; col < model->columnCount(); ++col) {
+            QString data = model->data(model->index(row, col)).toString();
+            ui->tableWidget_2->setItem(row, col, new QTableWidgetItem(data));
+        }
+    }
+}
+void MainWindow::on_pushButton_8_clicked()
+{
+    int idc = ui->lineEdit_15->text().toInt();
+    qDebug() << "Suppression de l'ID:" << idc;  // Pour le débogage
+
+    Commande Ctemp;  // Créez une nouvelle instance de Commande
+    bool test = Ctemp.supprimer(idc);
+
+    if (test) {
+        QMessageBox::information(nullptr, QObject::tr("OK"),
+                                 QObject::tr("Suppression effectuée\n"
+                                             "Click Cancel to exit."), QMessageBox::Cancel);
+        afficherCommandes(); // Rafraîchir le tableau
+        //addToHistory("Suppression de la commande", idc);
+    } else {
+        QMessageBox::critical(nullptr, QObject::tr("Not OK"),
+                              QObject::tr("Suppression non effectuée.\n"
+                                          "L'ID n'existe pas dans la base de données."), QMessageBox::Cancel);
+    }
+}
+void MainWindow::on_pushButton_3_clicked() {
+    int idc = ui->lineEdit_2->text().toInt();
+    if (idc == 0) {
+        QMessageBox::warning(this, "Erreur", "L'ID ne peut pas être nul ou égal à zéro.");
+        return;
+    }
+
+    QDate datec;
+    double montantTotal = -1;
+    QString modePaiement;
+    QString etat;
+
+    if (ui->dateEdit->date().isValid()) {
+        datec = ui->dateEdit->date();
+    }
+
+    if (!ui->lineEdit_2->text().isEmpty()) {
+        montantTotal = ui->lineEdit_4->text().toDouble();
+        if (montantTotal < 0) {
+            QMessageBox::warning(this, "Erreur", "Le montant total ne peut pas être négatif.");
+            return;
+        }
+    }
+
+    if (!ui->comboBox_2->currentText().isEmpty()) {
+        modePaiement = ui->comboBox_2->currentText();
+    }
+    //addToHistory("Modifier de la commande", idc);
+
+    if (!ui->lineEdit_14->text().isEmpty()) {
+        etat = ui->lineEdit_14->text();
+        if (!etat.contains(QRegularExpression("[a-zA-Z]+"))) {
+            QMessageBox::warning(this, "Erreur", "L'état doit être une chaîne de caractères valide.");
+            return;
+        }
+    }
+
+    Commande Ctemp(idc, datec, montantTotal, modePaiement, etat);
+
+    bool test = Ctemp.modifier();
+    if (test) {
+        QMessageBox::information(nullptr, QObject::tr("Succès"),
+                                 QObject::tr("Modification effectuée avec succès.\nCliquez sur Annuler pour quitter."),
+                                 QMessageBox::Cancel);
+        afficherCommandes();
+        //addToHistory("modification de la commande", idc);
+    } else {
+        QMessageBox::critical(nullptr, QObject::tr("Erreur"),
+                              QObject::tr("La modification a échoué.\nCliquez sur Annuler pour quitter."),
+                              QMessageBox::Cancel);
+    }
+}
+void MainWindow::on_pushButton_10_clicked() {
+    int idc = ui->lineEdit_13->text().toInt();  // Remplacez `lineEdit_idRecherche` par l'ID réel du champ de saisie
+
+    Commande Ctemp;
+    QSqlQueryModel* model = Ctemp.rechercher(idc);
+    //addToHistory("recherche de la commande", idc);
+
+    if (model && model->rowCount() > 0) {
+        ui->tableWidget_2->setRowCount(0);  // Vider le tableau avant d'afficher les résultats
+        for (int row = 0; row < model->rowCount(); ++row) {
+            ui->tableWidget_2->insertRow(row);
+            for (int col = 0; col < model->columnCount(); ++col) {
+                QString data = model->data(model->index(row, col)).toString();
+                ui->tableWidget_2->setItem(row, col, new QTableWidgetItem(data));
+            }
+        }
+    } else {
+        qDebug() << "Aucun résultat trouvé pour l'ID de commande:" << idc;
+        QMessageBox::warning(this, "Aucun résultat", "Aucun résultat trouvé pour l'ID de commande spécifié.");
+        delete model;
+    }
+}
+void MainWindow::on_pushButton_7_clicked() {
+    Commande Ctemp;
+    QSqlQueryModel *model = Ctemp.trierParDateDesc();
+    //addToHistory("trier de la commande", 0);
+
+    if (model && model->rowCount() > 0) {
+        // Vider le QTableWidget avant d'ajouter les nouvelles données
+        ui->tableWidget_2->setRowCount(0); // Supprimer toutes les lignes existantes
+
+        // Remplir le QTableWidget avec les données du modèle
+        for (int row = 0; row < model->rowCount(); ++row) {
+            ui->tableWidget_2->insertRow(row); // Ajouter une nouvelle ligne
+            for (int col = 0; col < model->columnCount(); ++col) {
+                QString data = model->data(model->index(row, col)).toString();
+                ui->tableWidget_2->setItem(row, col, new QTableWidgetItem(data));
+            }
+        }
+
+        // Rafraîchir l'interface utilisateur pour s'assurer que les changements sont visibles
+        ui->tableWidget_2->repaint();
+        ui->tableWidget_2->update();
+
+        qDebug() << "Tri effectué, " << model->rowCount() << " lignes affichées.";
+
+    } else {
+        QMessageBox::warning(this, "Erreur de tri", "Impossible de trier les données.");
+        delete model;
+    }
+}
+
+void MainWindow::on_pushButton_statistiques_2_clicked() {
+    Commande Ctemp;
+    QMap<QString, int> statistiques = Ctemp.statistiquesParModePaiement();
+
+    // Calculer le total des commandes
+    int totalCommandes = 0;
+    for (auto it = statistiques.constBegin(); it != statistiques.constEnd(); ++it) {
+        totalCommandes += it.value();
+    }
+
+    // Vider le layout avant d'ajouter un nouveau graphique
+    QLayoutItem* item;
+    while ((item = ui->verticalLayout_graphique_2->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+
+    // Créer un pie series pour le graphique
+    QPieSeries *series = new QPieSeries();
+
+    // Ajouter les données du mode de paiement dans le graphique avec le pourcentage
+    for (auto it = statistiques.constBegin(); it != statistiques.constEnd(); ++it) {
+        QString modePaiement = it.key();
+        int count = it.value();
+        double percentage = (totalCommandes > 0) ? (count * 100.0 / totalCommandes) : 0.0;
+
+        // Ajouter l'élément avec le pourcentage
+        QString label = QString("%1: %2%").arg(modePaiement).arg(percentage, 0, 'f', 1);
+        series->append(label, count);
+    }
+
+    // Créer un graphique à partir de la série
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Statistiques des commandes par mode de paiement");
+
+    // Créer un chart view pour afficher le graphique
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);  // Améliorer l'anti-aliasing
+
+    // Afficher le graphique dans un layout
+    ui->verticalLayout_graphique_2->addWidget(chartView); // Ajoutez un QVBoxLayout dans votre UI
+}
+void MainWindow::on_pb_pdf_2_clicked()
+{
+    QString nomFichier = QFileDialog::getSaveFileName(this, "Enregistrer le PDF", "", "Fichiers PDF (*.pdf)");
+    if (!nomFichier.isEmpty()) {
+        Commande commande;
+
+        // Mettre à jour et récupérer les données de commande
+        QSqlQueryModel *model = commande.afficher();
+
+        // Exporter vers PDF
+        commande.exporterPDF(nomFichier, model);
+
+        // Libération de mémoire
+        delete model;
+
+        QMessageBox::information(this, "Exportation PDF", "Exportation vers PDF réussie !");
+    }
+}
+
+void MainWindow::afficherHistorique() {
+    QString cheminFichier = "C:/Users/yomna/OneDrive/Documents/gestioncommande/gestioncommande.txt";
+    QFile file(cheminFichier);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QMessageBox::warning(this, "Erreur", "Impossible d'ouvrir le fichier d'historique.");
+        return;
+    }
+
+    QTextStream in(&file);
+    QString historique = in.readAll();
+    file.close();
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Historique des commandes");
+    msgBox.setText(historique);
+    msgBox.exec();
+}
+
+void MainWindow::addToHistory(const QString &action, int idc) {
+    Commande Ctemp;
+    Ctemp.addToHistory(action, idc);
+}
+
+void MainWindow::on_pb_historique_2_clicked() {
+    QString cheminFichier = "C:/Users/yomna/OneDrive/Documents/gestioncommande/gestioncommande.txt";
+    QDesktopServices::openUrl(QUrl::fromLocalFile(cheminFichier));
+    QMessageBox::information(this, "Historique", "Les actions ont été enregistrées dans l'historique.");
+}
+
+void MainWindow::envoyerSMS(const QString &destinataire, const QString &message)
+{
+    // SID et auth token de Twilio
+    QString sid = "AC3d774920150677652a616de9643321c5";
+    QString authToken = "f508d8a29f08635a3f98d69e0fc121e7";
+
+    // URL de l'API Twilio
+    QString url = "https://api.twilio.com/2010-04-01/Accounts/" + sid + "/Messages.json";
+
+    // Créer un gestionnaire de requêtes
+    QNetworkAccessManager *networkAccessManager = new QNetworkAccessManager(this);
+
+    // Connecter le signal pour traiter la réponse
+    // connect(networkAccessManager, &QNetworkAccessManager::finished, this, &MainWindow::replyFinished);
+
+    // Construire les données POST
+    QByteArray postData;
+    postData.append("To=" + QUrl::toPercentEncoding(destinataire)); // Encodage pour les caractères spéciaux
+    postData.append("&From=%2B15075937465"); // Numéro de l'expéditeur avec "%2B" pour "+"
+    postData.append("&Body=" + QUrl::toPercentEncoding(message));
+
+    // Configurer la requête HTTP
+    QNetworkRequest request;
+    request.setUrl(QUrl(url));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+
+    // Ajouter l'autorisation avec Basic Auth
+    QString credentials = QString("%1:%2").arg(sid).arg(authToken);
+    request.setRawHeader("Authorization", "Basic " + credentials.toUtf8().toBase64());
+
+    // Envoyer la requête
+    networkAccessManager->post(request, postData);
+
+    QMessageBox::information(this, "Envoi SMS", "Le SMS est en cours d'envoi...");
+}
 
 
+
+void MainWindow::on_sendSMS_2_clicked()
+{
+    QString destinataire = "+21620629612"; // Numéro de téléphone du destinataire
+    QString message = ui->contenu_2->toPlainText(); // Récupérer le contenu du champ de texte
+
+    envoyerSMS(destinataire, message);
+
+}
+
+
+bool MainWindow::isCommandeIdValid(const QString& commandeId) {
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(*) FROM COMMANDE WHERE IDC = :commandeId");
+    query.bindValue(":commandeId", commandeId);
+
+    if (query.exec()) {
+        if (query.next()) {
+            int count = query.value(0).toInt();
+            qDebug() << "Nombre d'ID correspondants :" << count; // Affiche le nombre d'ID trouvés
+            return count > 0; // Retourne true si l'ID existe dans la base de données
+        } else {
+            qDebug() << "Erreur lors de l'exécution de la requête.";
+        }
+    } else {
+        qDebug() << "Erreur SQL:" << query.lastError().text(); // Affiche l'erreur si la requête échoue
+    }
+    return false; // Retourne false si l'ID n'existe pas ou si la requête échoue
+}
+
+void MainWindow::on_arduino_2_clicked() {
+    QString commandeId = ui->commandeIdInput_2->text(); // Récupère l'ID du QLineEdit
+
+    // Vérifie si l'ID est vide
+    if (commandeId.isEmpty()) {
+        QMessageBox::warning(this, "Erreur", "Veuillez entrer un ID valide.");
+        return;
+    }
+
+    // Valide l'ID dans la base de données
+    if (isCommandeIdValid(commandeId)) {
+        // Si l'ID est valide, envoie la commande à Arduino
+        if (arduino->estPortOuvert()) {
+            if (arduino->envoyerCommande("ouvrir")) {
+                QMessageBox::information(this, "Succès", "L'ID est valide. Le servomoteur tourne.");
+            }
+        } else {
+            QMessageBox::critical(this, "Erreur", "Le port série n'est pas ouvert !");
+        }
+    } else {
+        //Si l'ID n'est pas valide, ne pas afficher ce message si lQLatin1Char('ID existe dans la base)
+        QMessageBox::warning(this, "Erreur", "L'ID saisi n'existe pas dans la table 'commande'.");
+    }
+}

@@ -13,6 +13,11 @@ public:
 
     bool connectToArduino(const QString &portName);
     void disconnectFromArduino();
+    bool ouvrirPort(const QString &portName);
+    void fermerPort();
+    bool envoyerCommande(const QByteArray &commande);
+    bool estPortOuvert() const;
+
 
 signals:
     void idReceived(const QString &id); // Signal pour transmettre l'ID reçu
@@ -25,3 +30,4 @@ private:
 };
 
 #endif // ARDUINO_H
+

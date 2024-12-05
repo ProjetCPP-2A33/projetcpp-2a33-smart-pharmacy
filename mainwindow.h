@@ -10,6 +10,7 @@
 #include <QtSql>
 #include <QStandardItemModel>
 #include "arduino.h"
+#include "commande.h"
 
 
 
@@ -42,12 +43,28 @@ private slots:
     void afficherTopClients();
     void handleIdReceived(const QString &id);
     QString chercherEtatDansBD(const QString &id);
+    void on_pushButton_12_clicked();
+    void on_pushButton_8_clicked();
+    void on_pushButton_3_clicked();
+    void on_pushButton_7_clicked();
+    void on_pushButton_10_clicked();
+    void on_pushButton_statistiques_2_clicked();
+    void on_pb_pdf_2_clicked();
+    void on_pb_historique_2_clicked();
+    void envoyerSMS(const QString &destinataire, const QString &message);
+    void on_sendSMS_2_clicked();
+     void on_arduino_2_clicked();
 
 private:
     Ui::MainWindow *ui;
     Client client;
+    Commande Ctemp;
     void afficherClients();
     void afficherTableHistorique();
+    void afficherCommandes();
+    void afficherHistorique();
+    bool isCommandeIdValid(const QString& commandeId);
+    void addToHistory(const QString &action, int idc);
     Arduino *arduino;
     QStandardItemModel *model;
 
