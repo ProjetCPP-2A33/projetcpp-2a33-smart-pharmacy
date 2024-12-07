@@ -31,9 +31,11 @@ SOURCES += \
     arduino.cpp \
     camembertdialog.cpp \
     commande.cpp \
+    fournisseur.cpp \
         main.cpp \
         mainwindow.cpp \
-    connection.cpp
+    connection.cpp \
+    Qrcode.cpp
 
 
 
@@ -42,8 +44,10 @@ HEADERS += \
     arduino.h \
     camembertdialog.h \
     commande.h \
+    fournisseur.h \
         mainwindow.h \
-    connection.h
+    connection.h \
+    Qrcode.hpp
 
 FORMS += \
         mainwindow.ui

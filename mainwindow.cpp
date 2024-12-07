@@ -27,6 +27,25 @@
 #include <QDesktopServices>
 #include <QNetworkAccessManager>
 
+#include<QMessageBox>
+#include<QString>
+#include<QSqlQuery>
+#include<QSqlDatabase>
+#include<QSqlError>
+#include <QPdfWriter>
+#include <QPainter>
+#include <QTableWidget>
+#include <QFileDialog>
+#include <QPixmap>
+#include <QLabel>
+
+#include "Qrcode.hpp"
+#include <QPieSeries>
+#include <QPieSlice>
+#include <QChart>
+#include <QChartView>
+
+//using namespace  QtCharts;
 
 MainWindow::~MainWindow()
 {
@@ -64,11 +83,11 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWind
     this->setStyleSheet("QMainWindow { background-image: url(:/images/bg.png); }");
 
     // Configuration de la table view
-    model->setHorizontalHeaderLabels({"ID Commande"});
-    ui->tableView->setModel(model);
+ //   model->setHorizontalHeaderLabels({"ID Commande"});
+  //  ui->tableView->setModel(model);
 
     // Connexion à l'Arduino
-    bool connected = arduino->connectToArduino("COM5"); // Tente d'ouvrir le port série
+    bool connected = arduino->connectToArduino("COM3"); // Tente d'ouvrir le port série
     if (connected) {
         connect(arduino, &Arduino::idReceived, this, &MainWindow::handleIdReceived);
         qDebug() << "Connexion et ouverture réussies.";
@@ -76,9 +95,16 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWind
         QMessageBox::critical(this, "Erreur", "Connexion à Arduino échouée.");
     }
 
-
-
-
+//fournisseur
+    ui->tableWidget_4->setColumnCount(7);
+    QStringList headers1 = { "IDF", "Nomf", "Telephone","Adressef","Date_aff","disponibilite","image"};
+    ui->tableWidget_4->setHorizontalHeaderLabels(headers1);
+    afficherFournisseur();
+   // ui->tableView->setModel(ftmp.afficher());
+    ui->lien_image_3->hide();
+    stat_fournisseur();
+    ui->les_gestions->hide();
+    ui->menu->show();
 }
 
 
@@ -814,4 +840,414 @@ void MainWindow::on_arduino_2_clicked() {
         //Si l'ID n'est pas valide, ne pas afficher ce message si lQLatin1Char('ID existe dans la base)
         QMessageBox::warning(this, "Erreur", "L'ID saisi n'existe pas dans la table 'commande'.");
     }
+}
+
+
+
+void MainWindow::on_inserer_3_clicked()
+{
+    QString imagePath = QFileDialog::getOpenFileName(this, "Select Image", "", "Images (*.png *.jpg *.bmp *.gif)");
+
+    if (!imagePath.isEmpty()) {
+        // Load the image using QPixmap
+        QPixmap image(imagePath);
+
+        // Update the QLabel with the image
+        ui->afficher_image_3->setPixmap(image.scaled(ui->afficher_image_3->size(), Qt::KeepAspectRatio));
+        ui->lien_image_3->setText(imagePath);
+        ui->lien_image_3->hide();
+    }
+}
+
+void MainWindow::on_pushButton_ajouter_4_clicked()
+{
+    QString id = ui->lineEdit_24->text();
+    QString adressef =ui->lineEdit_23->text();
+    QString nomf =ui->lineEdit_25->text();
+    QString telephone = ui->lineEdit_26->text();
+    QDate date_aff=ui->dateEdit_5->date();
+    QString image=ui->lien_image_3->text();
+    int disponibilite = ui->checkBox_disponible_3->isChecked() ? 1 :
+                            (ui->checkBox_indisponible_3->isChecked() ? 0 : -1);
+
+    if (disponibilite == -1) {
+        QMessageBox::warning(this, QObject::tr("Attention"), QObject::tr("Veuillez sélectionner une disponibilité."));
+        return; // Quitte la méthode si aucune case n'est cochée
+    }
+    if (disponibilite == -1 ||nomf.isEmpty() || adressef.isEmpty() || telephone.isEmpty() || telephone.toInt() <= 0) {
+
+        QMessageBox::warning(this, QObject::tr("Erreur"), QObject::tr("Veuillez remplir tous les champs obligatoires."));
+        return; // Quitte la méthode si des champs sont vides
+    }
+
+
+    if (id.isEmpty() || id.toInt() == 0) {
+        QMessageBox::warning(this, QObject::tr("Erreur"), QObject::tr("L'ID doit être unique et non nul."));
+        return;
+    }
+    fournisseur ftmp(id, nomf, adressef, telephone, date_aff, disponibilite,image);
+    bool test=ftmp.ajouter(id, nomf, telephone, adressef, date_aff, disponibilite,image);
+
+     if (test)
+    {
+
+        QMessageBox::information(nullptr,QObject::tr("OK"),
+                                 QObject::tr("Ajout effectué\n"
+                                             "Click Cancel to exit."),QMessageBox::Cancel);
+         afficherFournisseur();
+        ui->afficher_image_3->clear();
+         stat_fournisseur();
+
+    }
+     else{
+        QMessageBox::critical(nullptr,QObject::tr("Not OK"),
+                              QObject::tr("Ajout non effectué.\n"
+                                          "Click Cancel to exit."),QMessageBox::Cancel);
+    }
+}
+
+void MainWindow::on_pushButton_modifier_4_clicked()
+{
+
+    QString id = ui->lineEdit_24->text();
+    QString adressef =ui->lineEdit_23->text();
+    QString nomf =ui->lineEdit_25->text();
+    QString telephone = ui->lineEdit_26->text();
+    QDate date_aff=ui->dateEdit_5->date();
+    QString image=ui->lien_image_3->text();
+    int disponibilite = ui->checkBox_disponible_3->isChecked() ? 1 :
+                            (ui->checkBox_indisponible_3->isChecked() ? 0 : -1);
+
+    if (id.isEmpty() || nomf.isEmpty() || adressef.isEmpty() || telephone.isEmpty() || disponibilite == -1) {
+        QMessageBox::warning(this, QObject::tr("Erreur"), QObject::tr("Veuillez remplir tous les champs."));
+        return;
+    }
+
+    fournisseur ftmp;
+    if (ftmp.modifier(id, nomf, adressef, telephone, date_aff, disponibilite,image)) {
+        QMessageBox::information(this, QObject::tr("Succès"), QObject::tr("Modification réussie."));
+        afficherFournisseur();
+        ui->afficher_image_3->clear();
+        stat_fournisseur();
+
+    } else {
+        QMessageBox::critical(this, QObject::tr("Erreur"), QObject::tr("Échec de la modification."));
+    }
+}
+
+void MainWindow::on_pushButton_rechercher_4_clicked()
+{
+    QString id = ui->lineEdit_27->text();  // Récupérer l'ID depuis un champ de texte
+
+    if (id.isEmpty()) {
+        QMessageBox::warning(this, QObject::tr("Erreur"), QObject::tr("Veuillez entrer un ID valide."));
+        return;
+    }
+
+    fournisseur ftmp;
+    QSqlQueryModel* model = ftmp.rechercher(id);  // Appeler la méthode rechercher
+
+    if (model != nullptr && model->rowCount() > 0) {
+        ui->tableWidget_4->setRowCount(0);  // Vider le tableau avant de le remplir
+        for (int row = 0; row < model->rowCount(); ++row) {
+            ui->tableWidget_4->insertRow(row);  // Ajouter une nouvelle ligne
+            for (int col = 0; col < model->columnCount(); ++col) {
+                QString data = model->data(model->index(row, col)).toString();
+                ui->tableWidget_4->setItem(row, col, new QTableWidgetItem(data));  // Remplir les données
+            }
+        }
+    } else {
+        QMessageBox::warning(this, QObject::tr("Aucun résultat"), QObject::tr("Aucun fournisseur trouvé avec cet ID."));
+    }
+}
+
+void MainWindow::on_pushButton_supprimer_4_clicked()
+{
+    QString id = ui->lineEdit_29->text();
+    qDebug() << "Suppression de l'ID:" << id;
+
+    fournisseur ftmp;
+    bool test = ftmp.supprimer(id);
+
+    if (test) {
+        QMessageBox::information(this, QObject::tr("OK"), QObject::tr("Suppression effectuée"));
+        afficherFournisseur();
+        stat_fournisseur();
+
+    } else {
+        QMessageBox::critical(this, QObject::tr("Erreur"), QObject::tr("Échec de la suppression."));
+    }
+}
+
+void MainWindow::on_pushButton_15_clicked()
+{
+    afficherFournisseur();
+
+}
+
+void MainWindow::on_pushButton_trier_4_clicked()
+{
+    // Vérifie si le tableau existe
+    if (!ui->tableWidget_4) {
+        QMessageBox::warning(this, "Erreur", "Le tableau n'existe pas !");
+        return;
+    }
+
+    // Trier selon la colonne des noms (colonne indexée à 1)
+    ui->tableWidget_4->sortItems(1, Qt::AscendingOrder);
+
+    // Message pour confirmer l'opération
+    QMessageBox::information(this, "Tri effectué", "Les noms ont été triés par ordre alphabétique.");
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    {
+        QString filePath = QFileDialog::getSaveFileName(this, "Enregistrer le PDF", "", "PDF Files (*.pdf)");
+        if (filePath.isEmpty())
+            return;
+
+        QPdfWriter pdfWriter(filePath);
+
+    // Définir la taille de la page
+    #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+        pdfWriter.setPageSize(QPageSize(QPageSize::A4));
+    #else
+        pdfWriter.setPageSizeMM(QSizeF(210.0, 297.0));
+    #endif
+        pdfWriter.setPageMargins(QMargins(30, 30, 30, 30));
+
+        QPainter painter(&pdfWriter);
+
+        // Définir une marge de départ
+        int startX = 70; // Position initiale x
+        int startY = 80; // Position initiale y
+        int rowHeight = 985; // Hauteur de chaque ligne
+        int colWidth = 1700; // Largeur de chaque colonne
+
+        // Titre du rapport
+        painter.setFont(QFont("Arial", 16, QFont::Bold));
+        painter.drawText(startX, startY, "Rapport Exporté");
+        startY += 500;
+
+        QTableWidget *tableWidget = ui->tableWidget_4;
+        if (!tableWidget) {
+            QMessageBox::warning(this, "Erreur", "Aucune table n'est disponible à exporter.");
+            return;
+        }
+
+        // Dessiner les en-têtes de colonne
+        painter.setFont(QFont("Arial", 12, QFont::Bold));
+        for (int col = 0; col < tableWidget->columnCount(); ++col) {
+            QString headerText = tableWidget->horizontalHeaderItem(col) ? tableWidget->horizontalHeaderItem(col)->text() : QString("Colonne %1").arg(col + 1);
+            painter.drawText(startX + col * colWidth, startY, headerText);
+        }
+
+        startY += rowHeight;
+
+        // Dessiner les lignes du tableau
+        painter.setFont(QFont("Arial", 12));
+        for (int row = 0; row < tableWidget->rowCount(); ++row) {
+            for (int col = 0; col < tableWidget->columnCount(); ++col) {
+                QString cellText = tableWidget->item(row, col) ? tableWidget->item(row, col)->text() : "";
+
+                // Supprimer "T00:00:00" des cellules
+                if (col == /* Index de la colonne Date_aff */ 3) { // Adapter à l'index réel
+                    cellText = cellText.replace("T00:00:00", "");
+                }
+                // Supprimer ".000" des dates
+                if (col == /* Index de la colonne Date_aff */ 3) { // Adapter à l'index réel
+                    cellText = cellText.replace(".000", "");
+                }
+
+                painter.drawText(startX + col * colWidth, startY, cellText);
+            }
+            startY += rowHeight;
+
+            // Vérifier si on dépasse la page et créer une nouvelle page
+            if (startY > pdfWriter.height() - 50) {
+                pdfWriter.newPage();
+                startY = 50;
+            }
+        }
+
+        painter.end();
+        QMessageBox::information(this, "Succès", "Le fichier PDF a été exporté avec succès.");
+    }
+
+}
+
+void MainWindow::on_tableWidget_4_itemClicked(QTableWidgetItem *item)
+{
+
+    // Get the row of the clicked item
+    int row = item->row();
+    // Retrieve data from the table based on the new structure
+    QString ID = ui->tableWidget_4->item(row, 0)->text();       // Column 1: ID
+    QString nomf = ui->tableWidget_4->item(row, 1)->text();      // Column 2: nom
+    QString adressef = ui->tableWidget_4->item(row, 3)->text(); // Column 3: adresse
+    QString date_aff = ui->tableWidget_4->item(row, 4)->text();  // Column 4: date_aff
+
+    QString telephone = ui->tableWidget_4->item(row, 2)->text();  // Column 6: telephone
+    QString disponibilite = ui->tableWidget_4->item(row, 5)->text(); // Column 7: disponibilite
+QString imagePath= ui->tableWidget_4->item(row, 6)->text();
+    // Set the retrieved data to the line edits
+    ui->lineEdit_24->setText(ID);
+    ui->lineEdit_25->setText(nomf);       // Assuming this is a combo box
+    ui->lineEdit_23->setText(adressef);
+    ui->dateEdit_5->setDate(QDate::fromString(date_aff));         // Assuming you have a lineEdit for date_aff
+    ui->lineEdit_26->setText(telephone);         // Assuming you have a lineEdit for telephone
+    QPixmap image(imagePath);
+    ui->afficher_image_3->setPixmap(image.scaled(ui->afficher_image_3->size(), Qt::KeepAspectRatio));
+    // Create a QR code from the attributes
+    QString text = "ID: " + ID + "\n"
+                                 "Nomf: " + nomf + "\n"
+                           "Adressef: " + adressef + "\n"
+                               "Date Aff: " + date_aff + "\n"
+                                "Téléphone: " + telephone + "\n"
+                                 "Disponibilité: " + disponibilite + "\n";
+
+    using namespace qrcodegen;
+    QrCode qr = QrCode::encodeText(text.toUtf8().data(), QrCode::Ecc::MEDIUM);
+
+    qint32 sz = qr.getSize();
+    QImage im(sz, sz, QImage::Format_RGB32);
+    QRgb black = qRgb(0, 0, 0);
+    QRgb white = qRgb(255, 255, 255);
+
+    for (int y = 0; y < sz; y++) {
+        for (int x = 0; x < sz; x++) {
+            im.setPixel(x, y, qr.getModule(x, y) ? black : white);
+        }
+    }
+    ui->qrcode_5->setPixmap(QPixmap::fromImage(im.scaled(100, 100, Qt::KeepAspectRatio, Qt::FastTransformation), Qt::MonoOnly));
+
+}
+
+
+void MainWindow::stat_fournisseur()
+{
+    QList<QWidget*> childWidgets = ui->label_stat_5->findChildren<QWidget*>();
+    for (QWidget* childWidget : childWidgets) {
+        childWidget->deleteLater();
+
+    }
+    //the clear didnt work, but my goal is when i second click this button it deleted old chart and renders a new one
+    ui->label_stat_5->clear();
+    ui->label_stat_5->hide();
+
+    int s0, s1;
+
+    s0 = ftmp.countdisponibilite("0");
+    s1 = ftmp.countdisponibilite("1");
+
+
+
+
+
+    int total = s0 + s1   ;
+    // Calculate percentages
+    float x = (total != 0) ? (s0 * 100.0f) / total : 0.0f;
+    float x1 = (total != 0) ? (s1 * 100.0f) / total : 0.0f;
+
+
+    // Adjust the percentages to ensure they sum up to 100%
+    float totalPercentage = x + x1  ;
+    if (totalPercentage != 100.0f && total != 0) {
+        float correction = 100.0f - totalPercentage;
+        x += correction;  // Apply correction to one of the slices (usually the largest one)
+    }
+
+
+
+    //qDebug() <<  x <<endl;
+    // 3 jour  33.00 %
+    QString ch1 = QString("dispo %1%").arg(QString::number(x, 'f', 2));
+    QString ch2 = QString("non dispo %2%").arg(QString::number(x1, 'f', 2));
+
+
+
+
+
+
+    QPieSeries *series=new QPieSeries();
+    series->setHoleSize(0.35);
+
+    QPieSlice *slice= series->append(ch1,x);
+    slice->setLabelVisible();
+    slice->setLabelColor(QColor(9, 124, 54));
+    slice->setBrush(QColor(9, 124, 54));
+
+    QPieSlice *slice1= series->append(ch2,x1);
+    slice1->setLabelVisible();
+    slice1->setLabelColor(QColor(Qt::black));
+    slice1->setBrush(QColor(Qt::black));
+
+
+    QChart *chart=new QChart();
+    chart->addSeries(series);
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+
+    QBrush backgroundBrush(QColor(187,93,87,0));
+    chart->setBackgroundBrush(backgroundBrush);
+    QChartView *chartview=new QChartView(chart);
+    chartview->setRenderHint(QPainter::Antialiasing);
+    chartview->setFixedSize(ui->label_stat_5->size());
+    chartview->setParent(ui->label_stat_5);
+    ui->label_stat_5->setStyleSheet("background:transparent; color:white; ");
+    ui->label_stat_5->show();
+
+}
+void MainWindow::afficherFournisseur()
+{
+
+    // Créer une instance de livraison pour appeler afficher()
+    fournisseur ftmp;
+    QSqlQueryModel* model = ftmp.afficherTri();
+
+    // Vider le QTableWidget avant de le remplir à nouveau
+    ui->tableWidget_4->setRowCount(0);
+
+    // Remplir le QTableWidget avec les données du modèle
+    for (int row = 0; row < model->rowCount(); ++row) {
+        ui->tableWidget_4->insertRow(row); // Ajouter une nouvelle ligne
+        for (int col = 0; col < model->columnCount(); ++col) {
+            QString data = model->data(model->index(row, col)).toString();
+            ui->tableWidget_4->setItem(row, col, new QTableWidgetItem(data));
+        }
+    }
+}
+
+void MainWindow::on_menu_client_clicked()
+{
+    ui->menu->hide();
+    ui->les_gestions->show();
+    ui->tabWidget->setCurrentIndex(0);
+}
+
+void MainWindow::on_menu_commande_clicked()
+{
+    ui->menu->hide();
+    ui->les_gestions->show();
+    ui->tabWidget->setCurrentIndex(2);
+}
+
+void MainWindow::on_menu_produit_clicked()
+{
+    ui->menu->hide();
+    ui->les_gestions->show();
+    ui->tabWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_menu_fournisseur_clicked()
+{
+    ui->menu->hide();
+    ui->les_gestions->show();
+    ui->tabWidget->setCurrentIndex(3);
+}
+
+void MainWindow::on_gestion_menu_clicked()
+{
+    ui->menu->show();
+    ui->les_gestions->hide();
 }

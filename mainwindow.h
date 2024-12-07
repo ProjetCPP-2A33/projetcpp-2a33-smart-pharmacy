@@ -11,7 +11,7 @@
 #include <QStandardItemModel>
 #include "arduino.h"
 #include "commande.h"
-
+#include "fournisseur.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -55,9 +55,42 @@ private slots:
     void on_sendSMS_2_clicked();
      void on_arduino_2_clicked();
 
+
+
+     void on_inserer_3_clicked();
+
+     void on_pushButton_ajouter_4_clicked();
+
+     void on_pushButton_modifier_4_clicked();
+
+     void on_pushButton_rechercher_4_clicked();
+
+     void on_pushButton_supprimer_4_clicked();
+
+     void on_pushButton_15_clicked();
+
+     void on_pushButton_trier_4_clicked();
+
+     void on_pushButton_4_clicked();
+
+     void on_tableWidget_4_itemClicked(QTableWidgetItem *item);
+     void stat_fournisseur();
+     void afficherFournisseur();
+
+     void on_menu_client_clicked();
+
+     void on_menu_commande_clicked();
+
+     void on_menu_produit_clicked();
+
+     void on_menu_fournisseur_clicked();
+
+     void on_gestion_menu_clicked();
+
 private:
     Ui::MainWindow *ui;
     Client client;
+    fournisseur ftmp;
     Commande Ctemp;
     void afficherClients();
     void afficherTableHistorique();

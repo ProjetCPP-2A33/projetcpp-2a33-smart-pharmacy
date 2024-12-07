@@ -4,15 +4,16 @@
 #include <QDebug>
 
 
-class connection
+class Connection
 {
     QSqlDatabase db;
 public:
-    connection();
-    bool createconnection();
+    Connection();
+    bool createconnect();
     void closeConnection();
+
+
 };
 
 #endif // CONNECTION_H
-
 
