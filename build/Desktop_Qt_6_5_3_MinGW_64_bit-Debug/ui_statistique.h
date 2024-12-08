@@ -11,26 +11,29 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QDialog>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_statistique
 {
 public:
-    QPushButton *pushButton_11;
     QLabel *label_chat;
+    QPushButton *pushButton_11;
 
-    void setupUi(QDialog *statistique)
+    void setupUi(QWidget *statistique)
     {
         if (statistique->objectName().isEmpty())
             statistique->setObjectName("statistique");
-        statistique->resize(900, 682);
+        statistique->resize(980, 681);
+        label_chat = new QLabel(statistique);
+        label_chat->setObjectName("label_chat");
+        label_chat->setGeometry(QRect(-1, -17, 850, 600));
         pushButton_11 = new QPushButton(statistique);
         pushButton_11->setObjectName("pushButton_11");
-        pushButton_11->setGeometry(QRect(750, 637, 131, 31));
+        pushButton_11->setGeometry(QRect(730, 620, 131, 31));
         pushButton_11->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "    color: black;\n"
 "    background-color: rgb(68, 176, 112);\n"
@@ -47,20 +50,17 @@ public:
 "    \n"
 "    border-radius: 10px;\n"
 "}"));
-        label_chat = new QLabel(statistique);
-        label_chat->setObjectName("label_chat");
-        label_chat->setGeometry(QRect(19, 0, 850, 600));
 
         retranslateUi(statistique);
 
         QMetaObject::connectSlotsByName(statistique);
     } // setupUi
 
-    void retranslateUi(QDialog *statistique)
+    void retranslateUi(QWidget *statistique)
     {
-        statistique->setWindowTitle(QCoreApplication::translate("statistique", "Dialog", nullptr));
-        pushButton_11->setText(QCoreApplication::translate("statistique", "Fermer", nullptr));
+        statistique->setWindowTitle(QCoreApplication::translate("statistique", "Form", nullptr));
         label_chat->setText(QString());
+        pushButton_11->setText(QCoreApplication::translate("statistique", "Fermer", nullptr));
     } // retranslateUi
 
 };

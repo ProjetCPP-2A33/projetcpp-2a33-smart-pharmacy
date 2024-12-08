@@ -1,0 +1,15 @@
+debug/Client.o
+debug/arduino.o
+debug/camembertdialog.o
+debug/commande.o
+debug/fournisseur.o
+debug/main.o
+debug/mainwindow.o
+debug/connection.o
+debug/Qrcode.o
+debug/produit.o
+debug/statistique.o
+debug/moc_arduino.o
+debug/moc_camembertdialog.o
+debug/moc_mainwindow.o
+debug/moc_statistique.o

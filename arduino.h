@@ -1,31 +1,37 @@
 #ifndef ARDUINO_H
 #define ARDUINO_H
 
-#include <QtSerialPort/QSerialPort>
-#include <QtSerialPort/QSerialPortInfo>
+#include <QSerialPort>
+#include <QObject>
 
-class Arduino
-{
+class Arduino : public QObject {
+    Q_OBJECT
+
 public:
-    Arduino();
-    int connect_arduino();
-    int close_arduino();
-    int write_to_arduino(QByteArray);
-    QByteArray read_from_arduino();
-    QString dialogue();
-    QSerialPort* getserial();
-    QString getarduino_port_name();
+    explicit Arduino(QObject *parent = nullptr);
+    ~Arduino();
 
-private:
-    QSerialPort * serial;
-    static const quint16 arduino_uno_vendor_id=9025;
-    static const quint16 arduino_uno_product_id=67;
-    QString arduino_port_name;
-    bool arduino_is_available;
-    QByteArray data;
+    bool connectToArduino(const QString &portName);
+    void disconnectFromArduino();
+    bool ouvrirPort(const QString &portName);
+    void fermerPort();
+    bool envoyerCommande(const QByteArray &commande);
+    bool estPortOuvert() const;
+    // New method to read a line
+
+    QByteArray readLine();  // To read a line from the serial port
+    bool canReadLine() const;
+
+
+signals:
+    void idReceived(const QString &id); // Signal pour transmettre l'ID reçu
 
 private slots:
-    void update_label();
+    void readSerialData(); // Lecture des données série
+
+private:
+    QSerialPort *serialPort;
 };
 
 #endif // ARDUINO_H
+

@@ -1,90 +1,102 @@
 #include "arduino.h"
 #include <QDebug>
-Arduino::Arduino()
-{
-    data="";
-    arduino_port_name="";
-    arduino_is_available=false;
-    serial=new QSerialPort;
-}
-int Arduino::connect_arduino()
-{
-    foreach (const QSerialPortInfo &serial_port_info, QSerialPortInfo::availablePorts())
-    {
-        if(serial_port_info.hasVendorIdentifier()&& serial_port_info.hasProductIdentifier())
-        {
-            if(serial_port_info.vendorIdentifier()==arduino_uno_vendor_id && serial_port_info.productIdentifier()==arduino_uno_product_id)
-            {
-                arduino_is_available=true;
-                arduino_port_name=serial_port_info.portName();
-            }
-        }
-    }
-    qDebug()<<"arduino_port_name is :"<< arduino_port_name;
-    if(arduino_is_available)
-    {
 
-
-        serial->setPortName(arduino_port_name);
-
-
-        if(serial->open(QSerialPort::ReadWrite)){
-
-            serial->setBaudRate(QSerialPort::Baud9600);
-            serial->setDataBits(QSerialPort::Data8);
-            serial->setParity(QSerialPort::NoParity);
-            serial->setStopBits(QSerialPort::OneStop);
-            serial->setFlowControl(QSerialPort::NoFlowControl);
-
-            return 0;
-        }
-
-        return 1;
-    }
-
-    return -1;
-}
-int Arduino::close_arduino()
-{
-    if(serial->isOpen())
-    {
-        serial->close();
-        return 0;
-    }
-    return 1;
+Arduino::Arduino(QObject *parent) : QObject(parent) {
+    serialPort = new QSerialPort(this);
 }
 
-QByteArray Arduino::read_from_arduino()
-{
-    if(serial->isReadable()){
-        data=serial->readAll();
-        return data;
+Arduino::~Arduino() {
+    if (serialPort->isOpen()) {
+        serialPort->close();
     }
-    return data;
+    delete serialPort;
+}
+
+bool Arduino::connectToArduino(const QString &portName) {
+    if (serialPort->isOpen()) {
+        serialPort->close(); // Ferme le port s'il est déjà ouvert
+    }
+
+    serialPort->setPortName(portName);
+    serialPort->setBaudRate(QSerialPort::Baud9600);
+    serialPort->setDataBits(QSerialPort::Data8);
+    serialPort->setParity(QSerialPort::NoParity);
+    serialPort->setStopBits(QSerialPort::OneStop);
+    serialPort->setFlowControl(QSerialPort::NoFlowControl);
+
+    // Ouvrir le port en mode lecture et écriture
+    if (serialPort->open(QIODevice::ReadWrite)) {
+        connect(serialPort, &QSerialPort::readyRead, this, &Arduino::readSerialData);
+        qDebug() << "Port série connecté et ouvert en lecture/écriture sur :" << portName;
+        return true;
+    } else {
+        qDebug() << "Erreur de connexion au port série :" << serialPort->errorString();
+        return false;
+    }
 }
 
 
-QString Arduino::dialogue()
-{
-    QByteArray ba;
-    while(serial->canReadLine()){
-        ba = serial->readLine();
-        qDebug() << ba;
+void Arduino::disconnectFromArduino() {
+    if (serialPort->isOpen()) {
+        serialPort->close();
     }
-
-    return ba ;
 }
 
-int Arduino::write_to_arduino(QByteArray d)
-{
-    if(serial->isWritable()){
-        serial->write(d);
-    }else{
-        qDebug()<<"Couldn't write to serial";
+void Arduino::readSerialData() {
+    while (serialPort->canReadLine()) {
+        QByteArray data = serialPort->readLine().trimmed();
+        emit idReceived(QString::fromUtf8(data)); // Émettre l'ID reçu
     }
-    return 0;
+}
+bool Arduino::ouvrirPort(const QString &portName) {
+    if (serialPort->isOpen()) {
+        serialPort->close();
+    }
+
+    serialPort->setPortName(portName);
+    serialPort->setBaudRate(QSerialPort::Baud9600);
+    serialPort->setDataBits(QSerialPort::Data8);
+    serialPort->setParity(QSerialPort::NoParity);
+    serialPort->setStopBits(QSerialPort::OneStop);
+    serialPort->setFlowControl(QSerialPort::NoFlowControl);
+
+    if (serialPort->open(QIODevice::WriteOnly)) {
+        qDebug() << "Port série ouvert : " << portName;
+        return true;
+    } else {
+        qDebug() << "Échec d'ouverture du port série : " << serialPort->errorString();
+        return false;
+    }
 }
 
+void Arduino::fermerPort() {
+    if (serialPort->isOpen()) {
+        serialPort->close();
+        qDebug() << "Port série fermé.";
+    }
+}
 
-QSerialPort* Arduino::getserial(){return serial;}
-QString Arduino::getarduino_port_name(){return arduino_port_name;}
+bool Arduino::envoyerCommande(const QByteArray &commande) {
+    if (serialPort->isOpen()) {
+        serialPort->write(commande);
+        qDebug() << "Commande envoyée : " << commande;
+        return true;
+    } else {
+        qDebug() << "Impossible d'envoyer la commande, le port série est fermé.";
+        return false;
+    }
+}
+
+bool Arduino::estPortOuvert() const {
+    return serialPort->isOpen();
+}
+QByteArray Arduino::readLine() {
+    if (serialPort->isOpen() && serialPort->canReadLine()) {
+        return serialPort->readLine().trimmed();
+    }
+    return QByteArray();  // Return an empty QByteArray if no data is available
+}
+
+bool Arduino::canReadLine() const {
+    return serialPort->isOpen() && serialPort->canReadLine();
+}
