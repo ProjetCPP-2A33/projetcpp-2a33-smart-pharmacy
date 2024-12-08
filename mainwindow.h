@@ -1,8 +1,10 @@
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
 #include "produit.h"
+#include "arduino.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -35,17 +37,15 @@ private slots:
     void on_pushButton_clicked();
 
     void on_send_clicked();
-
-
-    void on_showStatsForMen_clicked();
-
-    void on_showStatsForWomen_clicked();
-    void showPieChart(const QString &genre, QLayout *layout);
+    void update_label();
+    void afficherProduitsDemandesParGenre();
 
 private:
     Ui::MainWindow *ui;
-
+    QByteArray data;
     Produit Ptmp;
+    int quantite ;
+    Arduino a ;
 };
 
 #endif // MAINWINDOW_H

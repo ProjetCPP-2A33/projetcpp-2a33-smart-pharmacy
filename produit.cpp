@@ -20,6 +20,18 @@ Produit::Produit(int ID,QString libelle,float prix ,QDate dateExpiration ,QStrin
     this->disponibilite = disponibilite ;
     this->dateExpiration = dateExpiration ;
 }
+
+Produit::Produit(int ID,QString libelle,float prix ,QDate dateExpiration ,QString categorie,QString disponibilite, int quantite){
+    this->ID = ID ;
+    this->libelle = libelle ;
+    this->prix = prix ;
+    this->categorie = categorie ;
+    this->disponibilite = disponibilite ;
+    this->dateExpiration = dateExpiration ;
+    this->quantite = quantite ;
+}
+
+
 Produit::~Produit(){}
 
 //  GETTERS & SETTERS :
@@ -30,6 +42,7 @@ float Produit::getPrix(){return prix ;}
 QDate Produit::getDateExpiration(){return dateExpiration ;}
 QString Produit::getCategorie(){return categorie ;}
 QString Produit::getDisponiblite(){return disponibilite ;}
+int Produit::getQuantite(){return quantite ;}
 
 void Produit::setID(int ID){this->ID = ID ;}
 void Produit::setLibelle(QString libelle){this-> libelle = libelle ;}
@@ -37,6 +50,7 @@ void Produit::setPrix(float prix ){this->prix = prix;}
 void Produit::setDateExpiration(QDate dateExpiration){this->dateExpiration = dateExpiration ;}
 void Produit::setCategorie(QString categorie ) {this->categorie = categorie ;}
 void Produit::setDisponibilite(QString disponibilite){this->disponibilite = disponibilite ;}
+void Produit::setQuantite(int quantite){this->quantite = quantite ;}
 
 //  CRUD
 
@@ -273,6 +287,43 @@ Produit* Produit::readproduit(QString val)
         }
     }
     return this;
+}
+void Produit::incr(int id)
+{
+
+    QSqlQuery q;
+    q.prepare("UPDATE GESTIONPRODUITS SET QUANTITE=QUANTITE-1 WHERE ID = :id");
+    q.bindValue(":id", id);
+
+    q.exec();
+
+
+}
+
+int Produit::getQuantiteByID(int id) {
+    QSqlQuery query;
+    query.prepare("SELECT QUANTITE FROM GESTIONPRODUITS WHERE ID = :id");
+    query.bindValue(":id", id);
+
+    if (query.exec()) {
+        if (query.next()) {
+            return query.value(0).toInt();
+        }
+    } else {
+        qDebug() << "SQL Error:" << query.lastError().text();
+    }
+
+    return -1;
+}
+
+
+bool Produit::limit(int id)
+{
+
+    int s = getQuantiteByID(id);
+    if (s == 0 ) return true ; // QUANTITE MAXIMALE 20
+    else return false ;
+
 }
 
 

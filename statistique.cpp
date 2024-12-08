@@ -60,4 +60,3 @@ void statistique::on_pushButton_11_clicked()
 {
     close();
 }
-

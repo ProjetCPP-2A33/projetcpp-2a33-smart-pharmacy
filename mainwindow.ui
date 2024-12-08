@@ -54,7 +54,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1061,6 +1061,19 @@
          </size>
         </property>
        </widget>
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>60</y>
+          <width>81</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
        <zorder>label_9</zorder>
        <zorder>pushButton_11</zorder>
        <zorder>pushButton_stat</zorder>
@@ -1080,162 +1093,7 @@
        <zorder>pushButton_2</zorder>
        <zorder>pushButton</zorder>
        <zorder>label_10</zorder>
-      </widget>
-      <widget class="QWidget" name="tab_4">
-       <attribute name="title">
-        <string>Etat </string>
-       </attribute>
-       <widget class="QLabel" name="label_21">
-        <property name="geometry">
-         <rect>
-          <x>-10</x>
-          <y>-10</y>
-          <width>1241</width>
-          <height>601</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap>../../Pictures/Screenshots/Capture d'écran 2024-10-07 191245.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_22">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>120</y>
-          <width>501</width>
-          <height>271</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap>../../Pictures/Screenshots/Capture d'écran 2024-10-07 224650.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_80">
-        <property name="geometry">
-         <rect>
-          <x>240</x>
-          <y>100</y>
-          <width>541</width>
-          <height>311</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap>../../Downloads/Sans titre - 3.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_23">
-        <property name="geometry">
-         <rect>
-          <x>50</x>
-          <y>30</y>
-          <width>451</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap>../../Downloads/88.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_24">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>40</y>
-          <width>501</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Etat du produit le plus demandé selon le genre :</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_4">
-        <property name="geometry">
-         <rect>
-          <x>900</x>
-          <y>190</y>
-          <width>101</width>
-          <height>71</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton{
-    color: black;
-    background-color: rgb(68, 176, 112);
-    font-size: 20px;
-    line-height: 1.5;
-    width: 200px;
-    height: 40px;
-    opacity: 0.65;
-    text-align: center;
-    
-    border-style: solid;
-    border-width: 2px; /* vous pouvez ajuster l'épaisseur de la bordure */
-    border-color: black; /* couleur de la bordure */
-    
-    border-radius: 10px; /* ajustez cette valeur pour arrondir plus ou moins */
-}</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normalon>../../Downloads/360_F_258801609_qHQKHFxR6gfzOGrzm8hbvGBinLuC07lg-removebg-preview.png</normalon>
-         </iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>80</width>
-          <height>80</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_25">
-        <property name="geometry">
-         <rect>
-          <x>910</x>
-          <y>270</y>
-          <width>91</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Explorer</string>
-        </property>
-       </widget>
-       <zorder>label_21</zorder>
-       <zorder>label_80</zorder>
-       <zorder>label_22</zorder>
-       <zorder>label_23</zorder>
-       <zorder>label_24</zorder>
-       <zorder>pushButton_4</zorder>
-       <zorder>label_25</zorder>
+       <zorder>label_11</zorder>
       </widget>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
@@ -1455,17 +1313,17 @@
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="tab_4">
        <attribute name="title">
-        <string>Statistiques</string>
+        <string>Etat </string>
        </attribute>
-       <widget class="QLabel" name="label_11">
+       <widget class="QLabel" name="label_21">
         <property name="geometry">
          <rect>
           <x>-10</x>
-          <y>-40</y>
-          <width>1231</width>
-          <height>611</height>
+          <y>-10</y>
+          <width>1241</width>
+          <height>601</height>
          </rect>
         </property>
         <property name="text">
@@ -1478,12 +1336,12 @@
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QLabel" name="label_12">
+       <widget class="QLabel" name="label_23">
         <property name="geometry">
          <rect>
-          <x>70</x>
-          <y>20</y>
-          <width>501</width>
+          <x>50</x>
+          <y>30</y>
+          <width>451</width>
           <height>41</height>
          </rect>
         </property>
@@ -1497,12 +1355,12 @@
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QLabel" name="label_15">
+       <widget class="QLabel" name="label_24">
         <property name="geometry">
          <rect>
-          <x>80</x>
-          <y>30</y>
-          <width>481</width>
+          <x>30</x>
+          <y>20</y>
+          <width>501</width>
           <height>20</height>
          </rect>
         </property>
@@ -1510,137 +1368,42 @@
          <string>Etat du produit le plus demandé selon le genre :</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_16">
+       <widget class="QTableView" name="tableViewEtat">
         <property name="geometry">
          <rect>
-          <x>160</x>
-          <y>90</y>
-          <width>771</width>
-          <height>321</height>
+          <x>430</x>
+          <y>130</y>
+          <width>391</width>
+          <height>91</height>
          </rect>
         </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap>../../Pictures/Screenshots/Capture d'écran 2024-10-07 222607.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
        </widget>
-       <widget class="QLabel" name="label_78">
-        <property name="geometry">
-         <rect>
-          <x>140</x>
-          <y>70</y>
-          <width>811</width>
-          <height>361</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap>../../Downloads/Sans titre - 3.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="showStatsForMen">
+       <widget class="QLabel" name="label_25">
         <property name="geometry">
          <rect>
           <x>80</x>
-          <y>70</y>
-          <width>121</width>
-          <height>28</height>
+          <y>150</y>
+          <width>501</width>
+          <height>20</height>
          </rect>
         </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton{
-    color: black;
-    background-color: rgb(68, 176, 112);
-    font-size: 18px;
-    line-height: 1.5;
-    width: 200px;
-    height: 40px;
-    opacity: 0.65;
-    text-align: center;
-    
-    border-style: solid;
-    border-width: 2px;
-    border-color: #097C36; /* Couleur de la bordure modifiée */
-    
-    border-radius: 10px;
-}</string>
-        </property>
         <property name="text">
-         <string>Homme</string>
+         <string> produit le plus demandé selon femme :</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="showStatsForWomen">
-        <property name="geometry">
-         <rect>
-          <x>620</x>
-          <y>80</y>
-          <width>131</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton{
-    color: black;
-    background-color: rgb(68, 176, 112);
-    font-size: 18px;
-    line-height: 1.5;
-    width: 200px;
-    height: 40px;
-    opacity: 0.65;
-    text-align: center;
-    
-    border-style: solid;
-    border-width: 2px;
-    border-color: #097C36; /* Couleur de la bordure modifiée */
-    
-    border-radius: 10px;
-}</string>
-        </property>
-        <property name="text">
-         <string>Femme</string>
-        </property>
-       </widget>
-       <widget class="QWidget" name="horizontalLayoutWidget">
+       <widget class="QLabel" name="label_27">
         <property name="geometry">
          <rect>
           <x>80</x>
-          <y>130</y>
-          <width>441</width>
-          <height>291</height>
+          <y>180</y>
+          <width>501</width>
+          <height>20</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_1"/>
-       </widget>
-       <widget class="QWidget" name="horizontalLayoutWidget_2">
-        <property name="geometry">
-         <rect>
-          <x>620</x>
-          <y>130</y>
-          <width>441</width>
-          <height>291</height>
-         </rect>
+        <property name="text">
+         <string> produit le plus demandé selon homme :</string>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2"/>
        </widget>
-       <zorder>label_11</zorder>
-       <zorder>label_78</zorder>
-       <zorder>label_12</zorder>
-       <zorder>label_15</zorder>
-       <zorder>label_16</zorder>
-       <zorder>showStatsForMen</zorder>
-       <zorder>showStatsForWomen</zorder>
-       <zorder>horizontalLayoutWidget</zorder>
-       <zorder>horizontalLayoutWidget_2</zorder>
       </widget>
      </widget>
     </widget>
@@ -1672,7 +1435,7 @@
      <x>0</x>
      <y>0</y>
      <width>1167</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

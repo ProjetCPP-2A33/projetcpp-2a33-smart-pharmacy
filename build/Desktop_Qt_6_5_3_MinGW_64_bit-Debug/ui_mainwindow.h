@@ -16,7 +16,6 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateEdit>
 #include <QtWidgets/QGroupBox>
-#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -72,14 +71,7 @@ public:
     QPushButton *addbutton;
     QPushButton *pushButton_10;
     QPushButton *pushButton_2;
-    QWidget *tab_4;
-    QLabel *label_21;
-    QLabel *label_22;
-    QLabel *label_80;
-    QLabel *label_23;
-    QLabel *label_24;
-    QPushButton *pushButton_4;
-    QLabel *label_25;
+    QLabel *label_11;
     QWidget *tab_3;
     QLabel *label_17;
     QPushButton *send;
@@ -93,18 +85,13 @@ public:
     QLabel *label_14;
     QLabel *label_18;
     QLabel *label_26;
-    QWidget *tab_2;
-    QLabel *label_11;
-    QLabel *label_12;
-    QLabel *label_15;
-    QLabel *label_16;
-    QLabel *label_78;
-    QPushButton *showStatsForMen;
-    QPushButton *showStatsForWomen;
-    QWidget *horizontalLayoutWidget;
-    QHBoxLayout *horizontalLayout_1;
-    QWidget *horizontalLayoutWidget_2;
-    QHBoxLayout *horizontalLayout_2;
+    QWidget *tab_4;
+    QLabel *label_21;
+    QLabel *label_23;
+    QLabel *label_24;
+    QTableView *tableViewEtat;
+    QLabel *label_25;
+    QLabel *label_27;
     QWidget *tab_9;
     QWidget *tab_10;
     QWidget *tab_11;
@@ -534,6 +521,9 @@ public:
         icon6.addFile(QString::fromUtf8("../../Downloads/moins-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_2->setIcon(icon6);
         pushButton_2->setIconSize(QSize(30, 50));
+        label_11 = new QLabel(tab);
+        label_11->setObjectName("label_11");
+        label_11->setGeometry(QRect(320, 60, 81, 21));
         tabWidget->addTab(tab, QString());
         label_9->raise();
         pushButton_11->raise();
@@ -554,65 +544,7 @@ public:
         pushButton_2->raise();
         pushButton->raise();
         label_10->raise();
-        tab_4 = new QWidget();
-        tab_4->setObjectName("tab_4");
-        label_21 = new QLabel(tab_4);
-        label_21->setObjectName("label_21");
-        label_21->setGeometry(QRect(-10, -10, 1241, 601));
-        label_21->setPixmap(QPixmap(QString::fromUtf8("../../Pictures/Screenshots/Capture d'\303\251cran 2024-10-07 191245.png")));
-        label_21->setScaledContents(true);
-        label_22 = new QLabel(tab_4);
-        label_22->setObjectName("label_22");
-        label_22->setGeometry(QRect(260, 120, 501, 271));
-        label_22->setPixmap(QPixmap(QString::fromUtf8("../../Pictures/Screenshots/Capture d'\303\251cran 2024-10-07 224650.png")));
-        label_22->setScaledContents(true);
-        label_80 = new QLabel(tab_4);
-        label_80->setObjectName("label_80");
-        label_80->setGeometry(QRect(240, 100, 541, 311));
-        label_80->setPixmap(QPixmap(QString::fromUtf8("../../Downloads/Sans titre - 3.png")));
-        label_80->setScaledContents(true);
-        label_23 = new QLabel(tab_4);
-        label_23->setObjectName("label_23");
-        label_23->setGeometry(QRect(50, 30, 451, 41));
-        label_23->setPixmap(QPixmap(QString::fromUtf8("../../Downloads/88.png")));
-        label_23->setScaledContents(true);
-        label_24 = new QLabel(tab_4);
-        label_24->setObjectName("label_24");
-        label_24->setGeometry(QRect(60, 40, 501, 20));
-        pushButton_4 = new QPushButton(tab_4);
-        pushButton_4->setObjectName("pushButton_4");
-        pushButton_4->setGeometry(QRect(900, 190, 101, 71));
-        pushButton_4->setStyleSheet(QString::fromUtf8("QPushButton{\n"
-"    color: black;\n"
-"    background-color: rgb(68, 176, 112);\n"
-"    font-size: 20px;\n"
-"    line-height: 1.5;\n"
-"    width: 200px;\n"
-"    height: 40px;\n"
-"    opacity: 0.65;\n"
-"    text-align: center;\n"
-"    \n"
-"    border-style: solid;\n"
-"    border-width: 2px; /* vous pouvez ajuster l'\303\251paisseur de la bordure */\n"
-"    border-color: black; /* couleur de la bordure */\n"
-"    \n"
-"    border-radius: 10px; /* ajustez cette valeur pour arrondir plus ou moins */\n"
-"}"));
-        QIcon icon7;
-        icon7.addFile(QString::fromUtf8("../../Downloads/360_F_258801609_qHQKHFxR6gfzOGrzm8hbvGBinLuC07lg-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::On);
-        pushButton_4->setIcon(icon7);
-        pushButton_4->setIconSize(QSize(80, 80));
-        label_25 = new QLabel(tab_4);
-        label_25->setObjectName("label_25");
-        label_25->setGeometry(QRect(910, 270, 91, 20));
-        tabWidget->addTab(tab_4, QString());
-        label_21->raise();
-        label_80->raise();
-        label_22->raise();
-        label_23->raise();
-        label_24->raise();
-        pushButton_4->raise();
-        label_25->raise();
+        label_11->raise();
         tab_3 = new QWidget();
         tab_3->setObjectName("tab_3");
         label_17 = new QLabel(tab_3);
@@ -639,9 +571,9 @@ public:
 "    \n"
 "    border-radius: 10px; /* ajustez cette valeur pour arrondir plus ou moins */\n"
 "}"));
-        QIcon icon8;
-        icon8.addFile(QString::fromUtf8("../../Downloads/Capture_d_\303\251cran_2024-10-07_213823-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::On);
-        send->setIcon(icon8);
+        QIcon icon7;
+        icon7.addFile(QString::fromUtf8("../../Downloads/Capture_d_\303\251cran_2024-10-07_213823-removebg-preview.png"), QSize(), QIcon::Normal, QIcon::On);
+        send->setIcon(icon7);
         send->setIconSize(QSize(70, 70));
         label_19 = new QLabel(tab_3);
         label_19->setObjectName("label_19");
@@ -680,91 +612,31 @@ public:
         label_26->setGeometry(QRect(110, 240, 131, 21));
         label_26->setFont(font1);
         tabWidget->addTab(tab_3, QString());
-        tab_2 = new QWidget();
-        tab_2->setObjectName("tab_2");
-        label_11 = new QLabel(tab_2);
-        label_11->setObjectName("label_11");
-        label_11->setGeometry(QRect(-10, -40, 1231, 611));
-        label_11->setPixmap(QPixmap(QString::fromUtf8("../../Pictures/Screenshots/Capture d'\303\251cran 2024-10-07 191245.png")));
-        label_11->setScaledContents(true);
-        label_12 = new QLabel(tab_2);
-        label_12->setObjectName("label_12");
-        label_12->setGeometry(QRect(70, 20, 501, 41));
-        label_12->setPixmap(QPixmap(QString::fromUtf8("../../Downloads/88.png")));
-        label_12->setScaledContents(true);
-        label_15 = new QLabel(tab_2);
-        label_15->setObjectName("label_15");
-        label_15->setGeometry(QRect(80, 30, 481, 20));
-        label_16 = new QLabel(tab_2);
-        label_16->setObjectName("label_16");
-        label_16->setGeometry(QRect(160, 90, 771, 321));
-        label_16->setPixmap(QPixmap(QString::fromUtf8("../../Pictures/Screenshots/Capture d'\303\251cran 2024-10-07 222607.png")));
-        label_16->setScaledContents(true);
-        label_78 = new QLabel(tab_2);
-        label_78->setObjectName("label_78");
-        label_78->setGeometry(QRect(140, 70, 811, 361));
-        label_78->setPixmap(QPixmap(QString::fromUtf8("../../Downloads/Sans titre - 3.png")));
-        label_78->setScaledContents(true);
-        showStatsForMen = new QPushButton(tab_2);
-        showStatsForMen->setObjectName("showStatsForMen");
-        showStatsForMen->setGeometry(QRect(80, 70, 121, 28));
-        showStatsForMen->setStyleSheet(QString::fromUtf8("QPushButton{\n"
-"    color: black;\n"
-"    background-color: rgb(68, 176, 112);\n"
-"    font-size: 18px;\n"
-"    line-height: 1.5;\n"
-"    width: 200px;\n"
-"    height: 40px;\n"
-"    opacity: 0.65;\n"
-"    text-align: center;\n"
-"    \n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-color: #097C36; /* Couleur de la bordure modifi\303\251e */\n"
-"    \n"
-"    border-radius: 10px;\n"
-"}"));
-        showStatsForWomen = new QPushButton(tab_2);
-        showStatsForWomen->setObjectName("showStatsForWomen");
-        showStatsForWomen->setGeometry(QRect(620, 80, 131, 28));
-        showStatsForWomen->setStyleSheet(QString::fromUtf8("QPushButton{\n"
-"    color: black;\n"
-"    background-color: rgb(68, 176, 112);\n"
-"    font-size: 18px;\n"
-"    line-height: 1.5;\n"
-"    width: 200px;\n"
-"    height: 40px;\n"
-"    opacity: 0.65;\n"
-"    text-align: center;\n"
-"    \n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-color: #097C36; /* Couleur de la bordure modifi\303\251e */\n"
-"    \n"
-"    border-radius: 10px;\n"
-"}"));
-        horizontalLayoutWidget = new QWidget(tab_2);
-        horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
-        horizontalLayoutWidget->setGeometry(QRect(80, 130, 441, 291));
-        horizontalLayout_1 = new QHBoxLayout(horizontalLayoutWidget);
-        horizontalLayout_1->setObjectName("horizontalLayout_1");
-        horizontalLayout_1->setContentsMargins(0, 0, 0, 0);
-        horizontalLayoutWidget_2 = new QWidget(tab_2);
-        horizontalLayoutWidget_2->setObjectName("horizontalLayoutWidget_2");
-        horizontalLayoutWidget_2->setGeometry(QRect(620, 130, 441, 291));
-        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget_2);
-        horizontalLayout_2->setObjectName("horizontalLayout_2");
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        tabWidget->addTab(tab_2, QString());
-        label_11->raise();
-        label_78->raise();
-        label_12->raise();
-        label_15->raise();
-        label_16->raise();
-        showStatsForMen->raise();
-        showStatsForWomen->raise();
-        horizontalLayoutWidget->raise();
-        horizontalLayoutWidget_2->raise();
+        tab_4 = new QWidget();
+        tab_4->setObjectName("tab_4");
+        label_21 = new QLabel(tab_4);
+        label_21->setObjectName("label_21");
+        label_21->setGeometry(QRect(-10, -10, 1241, 601));
+        label_21->setPixmap(QPixmap(QString::fromUtf8("../../Pictures/Screenshots/Capture d'\303\251cran 2024-10-07 191245.png")));
+        label_21->setScaledContents(true);
+        label_23 = new QLabel(tab_4);
+        label_23->setObjectName("label_23");
+        label_23->setGeometry(QRect(50, 30, 451, 41));
+        label_23->setPixmap(QPixmap(QString::fromUtf8("../../Downloads/88.png")));
+        label_23->setScaledContents(true);
+        label_24 = new QLabel(tab_4);
+        label_24->setObjectName("label_24");
+        label_24->setGeometry(QRect(30, 20, 501, 20));
+        tableViewEtat = new QTableView(tab_4);
+        tableViewEtat->setObjectName("tableViewEtat");
+        tableViewEtat->setGeometry(QRect(430, 130, 391, 91));
+        label_25 = new QLabel(tab_4);
+        label_25->setObjectName("label_25");
+        label_25->setGeometry(QRect(80, 150, 501, 20));
+        label_27 = new QLabel(tab_4);
+        label_27->setObjectName("label_27");
+        label_27->setGeometry(QRect(80, 180, 501, 20));
+        tabWidget->addTab(tab_4, QString());
         tabWidget_2->addTab(tab_8, QString());
         tab_9 = new QWidget();
         tab_9->setObjectName("tab_9");
@@ -781,7 +653,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1167, 26));
+        menubar->setGeometry(QRect(0, 0, 1167, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -790,7 +662,7 @@ public:
         retranslateUi(MainWindow);
 
         tabWidget_2->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -901,15 +773,8 @@ public:
         addbutton->setText(QCoreApplication::translate("MainWindow", "Ajouter  ", nullptr));
         pushButton_10->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "Annuler  ", nullptr));
+        label_11->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Acceuil", nullptr));
-        label_21->setText(QString());
-        label_22->setText(QString());
-        label_80->setText(QString());
-        label_23->setText(QString());
-        label_24->setText(QCoreApplication::translate("MainWindow", "Etat du produit le plus demand\303\251 selon le genre :", nullptr));
-        pushButton_4->setText(QString());
-        label_25->setText(QCoreApplication::translate("MainWindow", "Explorer", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("MainWindow", "Etat ", nullptr));
         label_17->setText(QString());
         send->setText(QCoreApplication::translate("MainWindow", "Envoyer", nullptr));
         label_19->setText(QString());
@@ -919,14 +784,12 @@ public:
         label_18->setText(QCoreApplication::translate("MainWindow", "Nom de Produit:", nullptr));
         label_26->setText(QCoreApplication::translate("MainWindow", "Date d'expiration:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Notifications", nullptr));
-        label_11->setText(QString());
-        label_12->setText(QString());
-        label_15->setText(QCoreApplication::translate("MainWindow", "Etat du produit le plus demand\303\251 selon le genre :", nullptr));
-        label_16->setText(QString());
-        label_78->setText(QString());
-        showStatsForMen->setText(QCoreApplication::translate("MainWindow", "Homme", nullptr));
-        showStatsForWomen->setText(QCoreApplication::translate("MainWindow", "Femme", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Statistiques", nullptr));
+        label_21->setText(QString());
+        label_23->setText(QString());
+        label_24->setText(QCoreApplication::translate("MainWindow", "Etat du produit le plus demand\303\251 selon le genre :", nullptr));
+        label_25->setText(QCoreApplication::translate("MainWindow", " produit le plus demand\303\251 selon femme :", nullptr));
+        label_27->setText(QCoreApplication::translate("MainWindow", " produit le plus demand\303\251 selon homme :", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("MainWindow", "Etat ", nullptr));
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_8), QCoreApplication::translate("MainWindow", "Gestion produits", nullptr));
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_9), QCoreApplication::translate("MainWindow", "Gestion clients", nullptr));
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_10), QCoreApplication::translate("MainWindow", "Gestion employ\303\251s", nullptr));
